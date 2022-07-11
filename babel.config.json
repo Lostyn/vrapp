@@ -3,6 +3,7 @@
 		[ "@babel/preset-env", {
 			"targets": { "electron": "16.0.7" }
 		} ],
+		"@babel/preset-react",
 		"@babel/preset-typescript"
 	],
 	"compact": false

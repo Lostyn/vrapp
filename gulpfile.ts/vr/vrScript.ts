@@ -1,4 +1,5 @@
 import gulp from "gulp";
+import babel from "gulp-babel";
 import browserify from "browserify";
 import tsify from "tsify";
 
@@ -13,5 +14,4 @@ export function vrScript() {
 		.on("error", err => console.error(err))
 		.pipe(source("index.js"))
 		.pipe(gulp.dest(paths.vrView.buildDir));
-
 }
