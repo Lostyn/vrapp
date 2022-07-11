@@ -1,0 +1,38 @@
+{
+  "name": "vr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app/main/main.js",
+  "scripts": {
+    "dev": "gulp dev --color",
+    "build": "gulp build --color"
+  },
+  "author": "Lostyn",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/gulp": "^4.0.9",
+    "browser-sync": "^2.27.10",
+    "browserify": "^17.0.0",
+    "electron": "^16.0.7",
+    "electron-builder": "^22.14.13",
+    "electron-connect": "^0.6.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-cli": "^2.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-inject-string": "^1.1.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "ts-node": "^10.4.0",
+    "tsify": "^5.0.4",
+    "typescript": "^4.5.4",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
