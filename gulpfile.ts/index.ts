@@ -14,6 +14,12 @@ function clean() {
   return Promise.resolve();
 }
 
+function copyHttpsCert() {
+  return gulp.src('./cert/*.pem')
+    .pipe(gulp.dest('./dist/cert'))
+
+}
+
 function set(nodeEnv: string) {
   return () => {
     process.env.NODE_ENV = nodeEnv;
@@ -23,6 +29,7 @@ function set(nodeEnv: string) {
 
 const prepare = gulp.series(
   clean,
+  copyHttpsCert,
   vrview,
   app,
 )

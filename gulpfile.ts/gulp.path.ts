@@ -43,7 +43,7 @@ const paths: IPath = {
         base: `dist/vrView`,
         html: `src/vrView/index.html`,
         styles: `src/vrView/${style}`,
-        entryPoint: `src/vrView/index.tsx`,
+        entryPoint: `src/vrView/index.ts`,
         scripts: `src/vrView/${script}`,
         buildDir: `dist/vrView`
     }
