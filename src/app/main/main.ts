@@ -2,11 +2,14 @@ import { app, BrowserWindow } from 'electron';
 import path from "path";
 import Server from './server';
 import url from "url";
+import SocketServer from './socketServer';
+import { address } from './utils/ip';
 
 class Main {
 	isDev: boolean;
 	mainWindow: BrowserWindow | undefined;
 	server: Server;
+	socket: SocketServer;
 
 	constructor() {
 		this.isDev = process.env.NODE_ENV === 'development';
@@ -28,8 +31,12 @@ class Main {
 	}
 
 	private startup() {
+		const localIp = address();
+
+		const serverPort = 3002;
 		//
-		this.server = new Server();
+		this.server = new Server(serverPort);
+		this.socket = new SocketServer();
 
 		// Electron part
 		app.on('ready', async () => {
@@ -63,8 +70,11 @@ class Main {
 
 		app.on('window-all-closed', () => {
 			this.server.close();
+			this.socket.close();
 			app.quit();
 		})
+
+		console.log(`Https is runing at https://${localIp}:${serverPort}`);
 	}
 
 	connectElectronClient() {
