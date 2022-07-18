@@ -1,35 +1,38 @@
 import { Server } from 'socket.io';
+import { createServer } from "https";
+import { address } from './utils/ip';
 
 class SocketServer {
 	_io: Server;
-
 	_connections: { co: any, role: string }[];
 
-	constructor() {
-		this._io = new Server(3456);
+	constructor(port: number, key: any, cert: any) {
+		const httpServer = createServer({ key, cert });
+
+		this._io = new Server(httpServer, { /* options */ });
 		this._connections = [];
 
 		this._io.on('connect', socket => {
-			console.log(`connect ${socket.id}`);
+			console.log(`Connection: ${socket.id}`);
 
-			const coData = { co: socket, role: undefined };
-			this._connections.push(coData);
-
-			socket.on('setRole', (msg) => this.handleRole(socket.id, msg))
-			socket.emit('askRole');
-
-			socket.on('syncCommand', (msg) => {
-				console.log(msg);
-				this._connections.forEach(co => {
-					co.co.emit('execCommand', msg);
-				});
+			const coType = socket.handshake.query.type as string;
+			this._connections.push({
+				co: socket,
+				role: coType
 			})
-		})
-	}
 
-	handleRole = (socketId: string, msg) => {
-		const co = this._connections.find(o => o.co.id == socketId);
-		co.role = msg.role;
+			// socket.on('syncCommand', (msg) => {
+			// 	console.log(msg);
+			// 	this._connections.forEach(co => {
+			// 		co.co.emit('execCommand', msg);
+			// 	});
+			// })
+		})
+
+		const localIp = address();
+		httpServer.listen(port, () => {
+			console.log(`Socket is runing at wss://${localIp}:${port}`);
+		});
 	}
 
 	close = () => {

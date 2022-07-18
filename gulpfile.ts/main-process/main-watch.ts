@@ -5,6 +5,7 @@ import mainScripts from './main-scripts';
 
 const restart = (done) => {
 	electronServer.restart();
+	done();
 }
 
 export default function mainWatch(done) {

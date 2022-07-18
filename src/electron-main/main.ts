@@ -1,9 +1,9 @@
 import { app, BrowserWindow } from 'electron';
+import fs from 'fs';
 import path from "path";
 import Server from './server';
 import url from "url";
 import SocketServer from './socketServer';
-import { address } from './utils/ip';
 
 class Main {
 	isDev: boolean;
@@ -30,13 +30,21 @@ class Main {
 		}
 	}
 
-	private startup() {
-		const localIp = address();
+	loadCert() {
+		const basePath = path.resolve(__dirname, '../../cert');
+		const key = fs.readFileSync(`${basePath}/key.pem`);
+		const cert = fs.readFileSync(`${basePath}/cert.pem`);
+		return [key, cert];
+	}
 
-		const serverPort = 3002;
+	private startup() {
+		const serverPort = 3000;
+		const socketPort = 3002;
+		const [key, cert] = this.loadCert();
+
 		//
-		this.server = new Server(serverPort);
-		this.socket = new SocketServer();
+		this.server = new Server(serverPort, key, cert);
+		this.socket = new SocketServer(socketPort, key, cert);
 
 		// Electron part
 		app.on('ready', async () => {
@@ -74,7 +82,7 @@ class Main {
 			app.quit();
 		})
 
-		console.log(`Https is runing at https://${localIp}:${serverPort}`);
+
 	}
 
 	connectElectronClient() {
