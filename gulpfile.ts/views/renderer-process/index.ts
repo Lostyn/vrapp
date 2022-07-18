@@ -1,6 +1,10 @@
 import gulp from 'gulp';
-import { electronTemplate } from './template';
+import rendererScripts from './renderer-scripts';
+import rendererStyles from './renderer-styles';
+import rendererTemplate from './renderer-template';
 
 export const rendererProcess = gulp.series(
-	electronTemplate
+	rendererTemplate,
+	rendererStyles,
+	rendererScripts
 );
