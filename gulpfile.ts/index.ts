@@ -1,23 +1,13 @@
 import gulp from "gulp";
 import fs from 'fs';
-import paths from "./gulp.path";
-import { app } from './application';
-import { vrview } from './vr';
-import appServer from './application/appServe';
-import watch from './watch';
-import vrServe from './vr/vrServer';
+import { mainProcess } from './main-process';
+import { rendererProcess } from './views/renderer-process';
 
 function clean() {
-  if (fs.existsSync(paths.buildDir))
-    fs.rmSync(paths.buildDir, { recursive: true });
+  if (fs.existsSync(`dist`))
+    fs.rmSync(`dist`, { recursive: true });
 
   return Promise.resolve();
-}
-
-function copyHttpsCert() {
-  return gulp.src('./cert/*.pem')
-    .pipe(gulp.dest('./dist/cert'))
-
 }
 
 function set(nodeEnv: string) {
@@ -27,13 +17,20 @@ function set(nodeEnv: string) {
   };
 }
 
-const prepare = gulp.series(
-  clean,
-  copyHttpsCert,
-  vrview,
-  app,
-)
+// const prepare = gulp.series(
+//   clean,
+//   copyHttpsCert,
+//   vrview,
+//   app,
+// )
 
-export const dev = gulp.series(set("development"), prepare, watch, appServer);
-// export const dev = gulp.series(set("development"), prepare, electron);
+
+export const dev = gulp.series(
+  clean,
+  set("development"),
+  rendererProcess,
+  mainProcess
+);
+
+// export const dev = gulp.series(set("development"), prepare, watch, appServer);
 // export const build = gulp.series(set('production'), prepare, pack);

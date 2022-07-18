@@ -2,7 +2,7 @@
   "name": "vr",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/app/main/main.js",
+  "main": "dist/electron-main/main.js",
   "scripts": {
     "dev": "gulp dev --color",
     "build": "gulp build --color"
