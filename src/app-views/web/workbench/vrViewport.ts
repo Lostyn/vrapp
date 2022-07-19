@@ -1,35 +1,21 @@
 import * as THREE from 'three';
-import BaseScene from '../abstract/baseScene';
-import { BoxLineGeometry } from '../items/BoxLineGeometry';
+import BaseScene from '../../common/xr/baseScene';
 import { VRButton } from '../vr/VRButton';
 
-class Viewport extends BaseScene {
-	_room: THREE.LineSegments;
+class VRViewport extends BaseScene {
 	_vrButton: VRButton;
 	_controller: THREE.XRTargetRaySpace;
 
 	constructor(parent: HTMLElement) {
 		super(parent);
 
-		this.layout();
 		this._vrButton = new VRButton(this.renderer, parent);
 	}
 
 	layout() {
-		this.camera.position.set(0, 1.6, 3);
+		super.layout();
+
 		this.renderer.xr.enabled = true;
-
-		this._room = new THREE.LineSegments(
-			new BoxLineGeometry(6, 6, 6, 10, 10, 10).translate(0, 3, 0),
-			new THREE.LineBasicMaterial({ color: 0x808080 })
-		);
-		this.scene.add(this._room);
-
-		this.scene.add(new THREE.HemisphereLight(0x606060, 0x404040));
-
-		const light = new THREE.DirectionalLight(0xffffff);
-		light.position.set(1, 1, 1).normalize();
-		this.scene.add(light);
 
 		this.setControllers();
 	}
@@ -70,4 +56,4 @@ class Viewport extends BaseScene {
 	}
 }
 
-export default Viewport;
+export default VRViewport;

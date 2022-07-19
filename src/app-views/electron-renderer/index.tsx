@@ -1,19 +1,38 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { $, append } from '../common/core/dom';
 import SocketClientService from '../common/services/socketClient/socketClientService';
-import Workbench from './workench/workbench';
+import DesktopUI from './workench/DesktopUI';
+import DesktopViewport from './xr/DesktopViewport';
 
-function startup() {
+class DesktopWorkbench {
+	uiContainer: HTMLElement;
+	viewportContainer: HTMLElement;
 
-	const socket = new SocketClientService("localhost", 'app');
+	socket: SocketClientService;
+	viewport: DesktopViewport;
 
-	const container = document.createElement('div');
-	document.body.appendChild(container);
+	constructor() {
 
-	const root = createRoot(container!);
-	root.render(
-		<Workbench socket={socket}/>
-	);
+	}
+
+	startup = () => {
+		this.socket = new SocketClientService("localhost", 'app');
+
+		this.viewportContainer = append(document.body, $('div#viewport'));
+		this.uiContainer = append(document.body, $('div#ui'));
+
+		this.viewport = new DesktopViewport(this.viewportContainer);
+
+		this.buildUi();
+	}
+
+	buildUi() {
+		const root = createRoot(this.uiContainer!);
+		root.render(
+			<DesktopUI socket={this.socket}/>
+		);
+	}
 }
 
-window.onload = startup;
+window.onload = new DesktopWorkbench().startup;

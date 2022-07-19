@@ -28,9 +28,6 @@ class SocketServer {
 
 			socket.on('command', (msg) => {
 				this._io.emit('command', msg);
-				// this._connections.forEach(co => {
-				// 	co.co.emit('command', msg);
-				// });
 			})
 
 			socket.on('disconnect', reason => {

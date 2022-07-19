@@ -1,8 +1,8 @@
 import SocketClientService from '../common/services/socketClient/socketClientService';
-import Viewport from './workbench/viewport';
+import VRViewport from './workbench/vrViewport';
 
 class App {
-	_viewport: Viewport;
+	_viewport: VRViewport;
 
 	_socket: SocketClientService;
 
@@ -15,7 +15,7 @@ class App {
 		this._socket = new SocketClientService(host, 'web');
 		// this._stateService = new StateService(this._socket);
 
-		this._viewport = new Viewport(container);
+		this._viewport = new VRViewport(container);
 	}
 }
 

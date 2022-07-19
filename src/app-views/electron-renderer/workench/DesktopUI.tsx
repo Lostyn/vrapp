@@ -7,17 +7,17 @@ type IProps = {
 	socket: SocketClientService
 }
 
-const Workbench = (props: IProps) => {
+const DesktopUI = (props: IProps) => {
 	const createTest = () => {
 		const cmd = new CreateCommand('cube');
 		props.socket.sendCommand(cmd);
 	};
 
 	return (
-		<div id="workbench">
+		<div id="ui">
 			<button onClick={createTest}>Create</button>
 		</div>
 	)
 }
 
-export default Workbench;
+export default DesktopUI;
