@@ -9,13 +9,18 @@ class SocketServer {
 	constructor(port: number, key: any, cert: any) {
 		const httpServer = createServer({ key, cert });
 
-		this._io = new Server(httpServer, { /* options */ });
+		this._io = new Server(httpServer, {
+			/* options */
+			cors: {
+				origin: "*"
+			}
+		});
 		this._connections = [];
 
 		this._io.on('connect', socket => {
-			console.log(`Connection: ${socket.id}`);
-
 			const coType = socket.handshake.query.type as string;
+			console.log(`Connection: ${socket.id} [${coType}]`);
+
 			this._connections.push({
 				co: socket,
 				role: coType

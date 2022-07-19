@@ -6,16 +6,22 @@ class SocketClientService {
 
 	public get ws() { return this._ws };
 
-	constructor(ip: string) {
-
-		this._ws = io(`https://${ip}:3456/`, { secure: true });
+	constructor(ip: string, coType: string) {
+		this._ws = io(`wss://${ip}:3002`, {
+			secure: true,
+			reconnectionDelayMax: 10000,
+			rejectUnauthorized: false, // Important for self-signed cert !!!!!
+			query: {
+				"type": coType
+			}
+		});
 
 		this._ws.on("connect", () => {
 			console.log(this._ws.id);
 		});
 
-		this._ws.on('askRole', () => {
-			this._ws.emit('setRole', { role: 'app' });
+		this._ws.on('error', (err) => {
+			console.error(err);
 		})
 	}
 

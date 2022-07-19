@@ -5,7 +5,7 @@ import Workbench from './workench/workbench';
 
 function startup() {
 
-	const socket = new SocketClientService("localhost");
+	const socket = new SocketClientService("localhost", 'app');
 
 	const container = document.createElement('div');
 	document.body.appendChild(container);
