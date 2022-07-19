@@ -12,7 +12,7 @@ function startup() {
 
 	const root = createRoot(container!);
 	root.render(
-		<Workbench />
+		<Workbench socket={socket}/>
 	);
 }
 

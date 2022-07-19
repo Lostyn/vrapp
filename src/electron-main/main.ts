@@ -26,6 +26,7 @@ class Main {
 		try {
 			this.startup();
 		} catch (error) {
+			console.error(error);
 			app.exit(1);
 		}
 	}

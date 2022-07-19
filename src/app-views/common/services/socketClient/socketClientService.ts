@@ -1,5 +1,9 @@
 
 import { io, Socket } from "socket.io-client";
+import { Command, _command } from '../../command/command';
+
+
+import '../../command/createCommand';
 
 class SocketClientService {
 	_ws: Socket;
@@ -18,6 +22,8 @@ class SocketClientService {
 
 		this._ws.on("connect", () => {
 			console.log(this._ws.id);
+
+			this._ws.on('command', this.onCommand);
 		});
 
 		this._ws.on('error', (err) => {
@@ -25,8 +31,17 @@ class SocketClientService {
 		})
 	}
 
-	sync(o) {
-		this._ws.emit('syncCommand', o);
+	sendCommand(cmd: Command<any>) {
+		this._ws.emit('command', cmd.toMsg());
+	}
+
+	onCommand = (...args) => {
+		console.log('onCommand', args);
+		const { type, payload } = args[0];
+
+		const ctor = _command.commands[type];
+		const cmd = new ctor(...payload);
+		console.log(cmd);
 	}
 
 	close = () => {

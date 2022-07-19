@@ -26,12 +26,12 @@ class SocketServer {
 				role: coType
 			})
 
-			// socket.on('syncCommand', (msg) => {
-			// 	console.log(msg);
-			// 	this._connections.forEach(co => {
-			// 		co.co.emit('execCommand', msg);
-			// 	});
-			// })
+			socket.on('command', (msg) => {
+				this._io.emit('command', msg);
+				// this._connections.forEach(co => {
+				// 	co.co.emit('command', msg);
+				// });
+			})
 
 			socket.on('disconnect', reason => {
 				console.log(`Disconnection: ${socket.id} [${reason}]`);
