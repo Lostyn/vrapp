@@ -34,11 +34,21 @@ export default function viewsWatch(done) {
 	gulp.watch(`src/app-views/electron-renderer/index.html`, gulp.series(rendererTemplate, reloadElec));
 	gulp.watch(`src/app-views/electron-renderer/${style}`, gulp.series(rendererStyles, reloadElec));
 
-	gulp.watch(`src/app-views/common/${script}`, gulp.series(commonScripts, webScripts, reloadAll));
+	gulp.watch(`src/app-views/common/${script}`, gulp.series(commonScripts, webScripts, rendererScripts, reloadAll));
 
 	gulp.watch(`src/app-views/web/${script}`, gulp.series(webScripts, reloadWeb));
 	gulp.watch(`src/app-views/web/index.html`, gulp.series(webTemplate, reloadWeb));
 	gulp.watch(`src/app-views/web/${style}`, gulp.series(webStyles, reloadWeb));
+
+	done();
+}
+
+export function viewsWatchElectron(done) {
+	gulp.watch(`src/app-views/electron-renderer/${script}`, gulp.series(rendererScripts, reloadElec));
+	gulp.watch(`src/app-views/electron-renderer/index.html`, gulp.series(rendererTemplate, reloadElec));
+	gulp.watch(`src/app-views/electron-renderer/${style}`, gulp.series(rendererStyles, reloadElec));
+
+	gulp.watch(`src/app-views/common/${script}`, gulp.series(commonScripts, rendererScripts, reloadElec));
 
 	done();
 }

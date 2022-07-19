@@ -1,7 +1,7 @@
 import gulp from "gulp";
 import fs from 'fs';
 import { mainProcess } from './main-process';
-import { views } from './views';
+import { electronView, views } from './views';
 
 function clean() {
   if (fs.existsSync(`dist`))
@@ -29,6 +29,13 @@ export const dev = gulp.series(
   clean,
   set("development"),
   views,
+  mainProcess
+);
+
+export const devElectron = gulp.series(
+  clean,
+  set("development"),
+  electronView,
   mainProcess
 );
 

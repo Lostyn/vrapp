@@ -1,7 +1,7 @@
 import gulp from 'gulp';
 import commonScripts from './common-scripts';
 import { rendererProcess } from './renderer-process';
-import viewsWatch from './views-watch';
+import viewsWatch, { viewsWatchElectron } from './views-watch';
 import { webProcess } from './web';
 
 export const views = gulp.series(
@@ -10,3 +10,9 @@ export const views = gulp.series(
 	webProcess,
 	viewsWatch
 );
+
+export const electronView = gulp.series(
+	commonScripts,
+	rendererProcess,
+	viewsWatchElectron
+)

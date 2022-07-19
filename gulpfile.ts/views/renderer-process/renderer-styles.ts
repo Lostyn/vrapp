@@ -3,12 +3,12 @@ import sass from 'gulp-dart-sass';
 import concat from 'gulp-concat';
 import { font, style } from '../../globs';
 
-function fonts() {
+function rendererFonts() {
 	return gulp.src(`src/app-views/electron-renderer/${font}`)
 		.pipe(gulp.dest(`dist/app-views/electron-renderer`));
 }
 
-function styles() {
+function rendererStyles() {
 	return gulp.src(`src/app-views/electron-renderer/${style}`)
 		.pipe(sass().on('error', sass.logError))
 		.pipe(concat('index.css'))
@@ -16,5 +16,5 @@ function styles() {
 }
 
 export default gulp.parallel(
-	fonts, styles
+	rendererFonts, rendererStyles
 )
