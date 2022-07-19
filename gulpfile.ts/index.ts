@@ -1,7 +1,7 @@
 import gulp from "gulp";
 import fs from 'fs';
 import { mainProcess } from './main-process';
-import { rendererProcess } from './views/renderer-process';
+import { views } from './views';
 
 function clean() {
   if (fs.existsSync(`dist`))
@@ -28,7 +28,7 @@ function set(nodeEnv: string) {
 export const dev = gulp.series(
   clean,
   set("development"),
-  rendererProcess,
+  views,
   mainProcess
 );
 

@@ -5,5 +5,5 @@ import { script } from '../../globs';
 export default function rendererScripts() {
 	return gulp.src(`src/app-views/electron-renderer/${script}`)
 		.pipe(babel())
-		.pipe(gulp.dest(`src/app-views/electron-renderer`));
+		.pipe(gulp.dest(`dist/app-views/electron-renderer`));
 }

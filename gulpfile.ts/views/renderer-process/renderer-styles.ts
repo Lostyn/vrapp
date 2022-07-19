@@ -12,7 +12,7 @@ function styles() {
 	return gulp.src(`src/app-views/electron-renderer/${style}`)
 		.pipe(sass().on('error', sass.logError))
 		.pipe(concat('index.css'))
-		.pipe(gulp.dest(`dis/app-views/electron-renderer`));
+		.pipe(gulp.dest(`dist/app-views/electron-renderer`));
 }
 
 export default gulp.parallel(
