@@ -32,6 +32,10 @@ class SocketServer {
 			// 		co.co.emit('execCommand', msg);
 			// 	});
 			// })
+
+			socket.on('disconnect', reason => {
+				console.log(`Disconnection: ${socket.id} [${reason}]`);
+			})
 		})
 
 		const localIp = address();
