@@ -1,3 +1,4 @@
+import SceneService from '../common/services/scene/sceneService';
 import SocketClientService from '../common/services/socketClient/socketClientService';
 import VRViewport from './workbench/vrViewport';
 
@@ -5,6 +6,7 @@ class App {
 	_viewport: VRViewport;
 
 	_socket: SocketClientService;
+	_sceneService: SceneService;
 
 	startup() {
 		const container = document.createElement('div');
@@ -13,7 +15,7 @@ class App {
 
 		const host = window.location.hostname;
 		this._socket = new SocketClientService(host, 'web');
-		// this._stateService = new StateService(this._socket);
+		this._sceneService = new SceneService(this._socket);
 
 		this._viewport = new VRViewport(container);
 	}

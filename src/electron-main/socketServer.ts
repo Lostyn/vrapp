@@ -26,8 +26,9 @@ class SocketServer {
 				role: coType
 			})
 
-			socket.on('command', (msg) => {
-				this._io.emit('command', msg);
+			socket.on('scene:rpc', (msg) => {
+				console.log(msg);
+				this._io.emit('scene:rpc', msg);
 			})
 
 			socket.on('disconnect', reason => {

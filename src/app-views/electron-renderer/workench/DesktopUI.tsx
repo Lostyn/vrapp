@@ -1,16 +1,14 @@
 import React from "react";
-import { CreateCommand } from '../../common/command/createCommand';
-import SocketClientService from '../../common/services/socketClient/socketClientService';
+import SceneService from '../../common/services/scene/sceneService';
 
 
 type IProps = {
-	socket: SocketClientService
+	sceneService: SceneService
 }
 
 const DesktopUI = (props: IProps) => {
 	const createTest = () => {
-		const cmd = new CreateCommand('cube');
-		props.socket.sendCommand(cmd);
+		props.sceneService.rpc_createObject('cube');
 	};
 
 	return (
