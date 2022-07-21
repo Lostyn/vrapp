@@ -1,6 +1,7 @@
 import { Mesh, MeshBasicMaterial, PlaneGeometry, Vector3 } from 'three';
 import { SceneObject } from '../../../../types/scene';
 import SceneService from '../../services/scene/sceneService';
+import Quad from '../sceneObject/quad';
 import BaseScene from './baseScene';
 
 class Viewport extends BaseScene {
@@ -16,11 +17,9 @@ class Viewport extends BaseScene {
 	onSOAdded_handle = (so: SceneObject) => {
 		switch (so.name) {
 			case 'quad':
-				const geometry = new PlaneGeometry(1, 1, 1, 1);
-				const material = new MeshBasicMaterial({ color: 0xfff });
-
-				var obj = new Mesh(geometry, material);
+				var obj = new Quad()
 				obj.position.set(so.transform.x, so.transform.y, so.transform.z);
+				obj.rotation.set(0, 0, 0);
 
 				this._content.set(so.instanceID, obj);
 				this.scene.add(obj);

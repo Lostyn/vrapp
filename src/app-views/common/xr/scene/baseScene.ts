@@ -38,7 +38,7 @@ export default abstract class BaseScene {
 	}
 
 	protected layout() {
-		this.camera.position.set(0, 1.7, 2);
+		this.camera.position.set(0, 1.7, -2);
 
 		this._grid = new InfiniteGridHelper();
 		this.scene.add(this._grid);
