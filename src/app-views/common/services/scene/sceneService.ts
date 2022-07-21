@@ -43,8 +43,6 @@ class SceneService {
 	}
 
 	rpc_createObject(objStr: string) {
-		console.log('call from rpc', objStr);
-
 		var so: SceneObject = {
 			instanceID: createUUID(),
 			name: objStr,

@@ -8,7 +8,7 @@ type IProps = {
 
 const DesktopUI = (props: IProps) => {
 	const createTest = () => {
-		props.sceneService.rpc_createObject('cube');
+		props.sceneService.rpc_createObject('quad');
 	};
 
 	return (

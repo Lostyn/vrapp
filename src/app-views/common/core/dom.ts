@@ -28,7 +28,7 @@ export function prepend<T extends Node>(parent: HTMLElement, child: T): T {
 }
 
 const SELECTOR_REGEX = /([\w\-]+)?(#([\w\-]+))?((.([\w\-]+))*)/;
-export function $(description: string) {
+export function $<T extends HTMLElement>(description: string) {
 	let match = SELECTOR_REGEX.exec(description);
 
 	let result = document.createElement(match[1] || 'div');
@@ -38,7 +38,7 @@ export function $(description: string) {
 	if (match[4])
 		result.className = match[4].replace(/\./g, ' ').trim();
 
-	return result;
+	return result as T;
 }
 
 export function activeClass(element: HTMLElement, className: string, isActive: boolean) {

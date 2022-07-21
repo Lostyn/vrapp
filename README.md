@@ -5,8 +5,6 @@
 
 https://socket.io/fr/docs/v4/server-initialization/#with-an-https-server
 
-key passphrase: `tsvrtest`
-
 ## Debug Oculus Browser web view on device
 - Adb must be setup over usb or wifi
 - open chrome
