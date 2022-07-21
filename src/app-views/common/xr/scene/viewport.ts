@@ -11,13 +11,14 @@ class Viewport extends BaseScene {
 		super(parent);
 
 		this._content = new Map<string, Mesh>();
+
 		sceneService.onSOAdded.register(this.onSOAdded_handle);
 	}
 
 	onSOAdded_handle = (so: SceneObject) => {
 		switch (so.name) {
 			case 'quad':
-				var obj = new Quad()
+				var obj = new Quad(2, 1)
 				obj.position.set(so.transform.x, so.transform.y, so.transform.z);
 				obj.rotation.set(0, 0, 0);
 
