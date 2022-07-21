@@ -26,7 +26,7 @@ class DesktopWorkbench {
 		this.viewportContainer = append(document.body, $('div#viewport'));
 		this.uiContainer = append(document.body, $('div#ui'));
 
-		this.viewport = new DesktopViewport(this.viewportContainer);
+		this.viewport = new DesktopViewport(this.viewportContainer, this.sceneService);
 
 		this.buildUi();
 	}

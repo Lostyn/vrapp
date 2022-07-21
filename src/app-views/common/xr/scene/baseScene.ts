@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { BoxLineGeometry } from './BoxLineGeometry';
+import InfiniteGridHelper from '../infiniteGridHelper';
 
 export default abstract class BaseScene {
 	private _parent: HTMLElement;
@@ -13,7 +13,7 @@ export default abstract class BaseScene {
 	public get renderer() { return this._renderer; }
 
 	private _clock;
-	private _room: THREE.LineSegments;
+	private _grid: THREE.Mesh;
 
 	constructor(parent: HTMLElement) {
 		this._parent = parent;
@@ -38,12 +38,10 @@ export default abstract class BaseScene {
 	}
 
 	protected layout() {
-		this.camera.position.set(0, 1.6, 3);
-		this._room = new THREE.LineSegments(
-			new BoxLineGeometry(6, 6, 6, 10, 10, 10).translate(0, 3, 0),
-			new THREE.LineBasicMaterial({ color: 0x808080 })
-		);
-		this.scene.add(this._room);
+		this.camera.position.set(0, 1.7, -2);
+
+		this._grid = new InfiniteGridHelper();
+		this.scene.add(this._grid);
 
 		this.scene.add(new THREE.HemisphereLight(0x606060, 0x404040));
 

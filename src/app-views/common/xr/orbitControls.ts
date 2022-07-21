@@ -69,8 +69,8 @@ class OrbitControls extends EventDispatcher {
 	// Mouse buttons
 	mouseButtons = {
 		LEFT: MOUSE.ROTATE,
-		MIDDLE: MOUSE.DOLLY,
-		RIGHT: MOUSE.PAN,
+		MIDDLE: MOUSE.PAN,
+		RIGHT: MOUSE.DOLLY,
 	}
 	// Touch fingers
 	touches = { ONE: TOUCH.ROTATE, TWO: TOUCH.DOLLY_PAN }
@@ -311,7 +311,7 @@ class OrbitControls extends EventDispatcher {
 			scope.domElement.addEventListener('contextmenu', onContextMenu)
 			scope.domElement.addEventListener('pointerdown', onPointerDown)
 			scope.domElement.addEventListener('pointercancel', onPointerCancel)
-			scope.domElement.addEventListener('wheel', onMouseWheel)
+			scope.domElement.addEventListener('wheel', onMouseWheel, { passive: true })
 		}
 
 		this.dispose = (): void => {
@@ -818,7 +818,7 @@ class OrbitControls extends EventDispatcher {
 				return
 			}
 
-			event.preventDefault()
+			// event.preventDefault()
 
 			scope.dispatchEvent(startEvent)
 

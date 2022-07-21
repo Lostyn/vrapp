@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import BaseScene from '../../common/xr/baseScene';
+import BaseScene from '../../common/xr/scene/baseScene';
 import { VRButton } from '../vr/VRButton';
 
 class VRViewport extends BaseScene {
