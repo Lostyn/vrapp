@@ -1,4 +1,15 @@
-html, body {
+@font-face {
+	font-family: 'open-sans';
+	font-weight: 200;
+	src: url("./fonts/OpenSans-Light.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: 'open-sans';
+	src: url("./fonts/OpenSans-Regular.ttf") format("truetype");
+}
+
+html, body, #workbench {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
@@ -9,7 +20,7 @@ html, body {
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	left: 0;
+	left: var(--sceneobject-width);
 	right: 0;
 }
 
@@ -17,4 +28,13 @@ html, body {
 	position: absolute;
 	top: 0;
 	left: 0;
+	width: 100%;
+	height: 100%;
 }
+
+:root {
+	--base-background-color: #24252E;
+	--over-background-color: #1f1f25;
+	--sceneobject-width: 250px;
+}
+

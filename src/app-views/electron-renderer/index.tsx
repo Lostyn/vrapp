@@ -3,14 +3,13 @@ import { createRoot } from "react-dom/client";
 import { $, append } from '../common/core/dom';
 import SceneService from '../common/services/scene/sceneService';
 import SocketClientService from '../common/services/socketClient/socketClientService';
-import DesktopUI from './workench/DesktopUI';
-import DesktopViewport from './xr/DesktopViewport';
+import ServiceProvider from './services/serviceContext';
+import Viewport from './workench/components/viewport/viewport';
+import DesktopUI from './workench/desktopUI';
 
 class DesktopWorkbench {
-	uiContainer: HTMLElement;
+	workbenchContainer: HTMLElement;
 	viewportContainer: HTMLElement;
-
-	viewport: DesktopViewport;
 
 	socket: SocketClientService;
 	sceneService: SceneService;
@@ -23,20 +22,19 @@ class DesktopWorkbench {
 		this.socket = new SocketClientService("localhost", 'app');
 		this.sceneService = new SceneService(this.socket);
 
-		this.viewportContainer = append(document.body, $('div#viewport'));
-		this.uiContainer = append(document.body, $('div#ui'));
-
-		this.viewport = new DesktopViewport(this.viewportContainer, this.sceneService);
-
+		this.workbenchContainer = append(document.body, $('div#workbench'));
 		this.buildUi();
 	}
 
 	buildUi() {
-		const root = createRoot(this.uiContainer!);
+		const root = createRoot(this.workbenchContainer);
 		root.render(
-			<DesktopUI
-				sceneService={this.sceneService}
-			/>
+			<ServiceProvider services={{
+				sceneService: this.sceneService
+			}}>
+				<Viewport />
+				<DesktopUI />
+			</ServiceProvider>
 		);
 	}
 }
