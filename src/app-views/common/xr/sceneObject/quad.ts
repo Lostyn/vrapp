@@ -235,7 +235,7 @@ class Quad extends Mesh {
 			uvs3.push(...this.vertices[i].uvs3Array);
 			uvs4.push(...this.vertices[i].uvs4Array);
 		}
-		console.log(uvs2);
+
 		this.geometry.attributes.position = new Float32BufferAttribute(positions, 3)
 		this.geometry.attributes.uv = new Float32BufferAttribute(uvs, 2)
 		this.geometry.attributes.uv2 = new Float32BufferAttribute(uvs2, 2)
