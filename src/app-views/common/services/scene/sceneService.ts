@@ -7,9 +7,13 @@ const kc_sceneServiceChannel: string = 'scene:rpc';
 class SceneService {
 
 	content: SceneObject[];
+	selected: string;
 
 	private _onSOAdded: Signal<SceneObject> = new Signal<SceneObject>();
 	public get onSOAdded() { return this._onSOAdded; }
+
+	private _onSelect: Signal = new Signal();
+	public get onSelect() { return this._onSelect; }
 
 	constructor(socket: SocketClientService) {
 		this.content = [];
@@ -27,7 +31,7 @@ class SceneService {
 
 		return new Proxy(this, {
 			get(_target: SceneService, propKey: PropertyKey) {
-				if (typeof _target[propKey] === 'object')
+				if (typeof _target[propKey] != 'function')
 					return _target[propKey];
 
 				return async function (...args: any[]) {
@@ -51,6 +55,12 @@ class SceneService {
 
 		this.content.push(so);
 		this._onSOAdded.fire(so);
+		this.selectObject(so.instanceID);
+	}
+
+	selectObject(instanceId: string) {
+		this.selected = instanceId;
+		this._onSelect.fire();
 	}
 }
 

@@ -10,23 +10,37 @@ type IProps = PropsWithService & {
 const SceneObjects = (props: IProps) => {
 	const { sceneService } = props.services;
 
-	const [ items, setItems ] = useState<SceneObject[]>([]);
 	const createTest = () => {
 		sceneService.rpc_createObject('quad');
 	};
 
-	useEffect( () => {
-		const onAdd = () => {
-			setItems(sceneService.content);
-		}
+	const [selected, setSelected] = useState<string>("");
+	const selectItem = (instanceId: string) => {
+		sceneService.selectObject(instanceId);
+	}
 
-		const unregister = sceneService.onSOAdded.register(onAdd);
-		return unregister;
+	const [ items, setItems ] = useState<SceneObject[]>([]);
+	useEffect( () => {
+		const onAdd = () => { setItems(sceneService.content); }
+		const onSelect = () => { setSelected(sceneService.selected); }
+
+		const unregister = [
+			sceneService.onSOAdded.register(onAdd),
+			sceneService.onSelect.register(onSelect)
+		];
+		return () => unregister.forEach( u => u() );
 	})
 
 	return (
-		<div id="sceneobjects">
-			{ items.map( so => <SceneObjectLine key={so.instanceID} {...so} />)}
+		<div id="scene-objects">
+			{ items.map( so =>
+					<SceneObjectLine
+						key={so.instanceID}
+						selected={so.instanceID == selected}
+						onClick={ () => selectItem(so.instanceID) }
+						{...so}
+					/>
+			)}
 			<button onClick={createTest}>Create</button>
 		</div>
 	)

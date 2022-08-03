@@ -1,4 +1,5 @@
 import React from "react";
+import ObjectProperties from './parts/objectproperties/objectProperties';
 import SceneObjects from './parts/sceneObjects/sceneobjects';
 
 
@@ -14,6 +15,7 @@ const DesktopUI = (props: IProps) => {
 	return (
 		<>
 			<SceneObjects />
+			<ObjectProperties />
 		</>
 	)
 }

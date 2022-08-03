@@ -21,7 +21,7 @@ html, body, #workbench {
 	top: 0;
 	bottom: 0;
 	left: var(--sceneobject-width);
-	right: 0;
+	right: var(--object-properties-width);
 }
 
 #ui {
@@ -35,6 +35,10 @@ html, body, #workbench {
 :root {
 	--base-background-color: #24252E;
 	--over-background-color: #1f1f25;
+	--accent-color-primary: #0a7ba3;
+
 	--sceneobject-width: 250px;
+	--object-properties-width: 250px;
+
 }
 

@@ -1,10 +1,11 @@
-#sceneobjects {
+#scene-objects {
 	position: absolute;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: var(--sceneobject-width);
 	background-color: var(--base-background-color);
+	padding: 2px;
 
 	& a {
 		display: block;
@@ -17,6 +18,10 @@
 
 		&:hover {
 			background-color: var(--over-background-color);
+		}
+
+		&.selected {
+			border-left: 2px solid var(--accent-color-primary);
 		}
 	}
 }

@@ -1,9 +1,19 @@
 import React from "react";
 import { SceneObject } from '../../../../../types/scene';
+import cs from 'classnames';
 
-const SceneObjectLine = (props: SceneObject) => {
+type IProps = SceneObject & {
+	selected: boolean,
+	onClick: () => void
+}
+
+const SceneObjectLine = (props: IProps) => {
+	const classNames = cs({
+		selected: props.selected
+	})
+
 	return (
-		<a> {props.name} </a>
+		<a className={classNames} onClick={props.onClick}>{props.name}</a>
 	)
 }
 
