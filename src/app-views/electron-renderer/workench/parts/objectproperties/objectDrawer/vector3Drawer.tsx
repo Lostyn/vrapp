@@ -2,6 +2,7 @@ import React from 'react'
 import { Vector3 } from 'three';
 
 type IProps = {
+	label: string,
 	onChange: (Vector3) => void;
 	property: Vector3;
 }
@@ -16,10 +17,19 @@ const Vector3Drawer = (props: IProps) => {
 	}
 
 	return (
-		<div>
-			<span>x: <input type="number" data-key='x' value={props.property.x} onChange={onChange}/></span>
-			<span>y: <input type="number" data-key='y' value={props.property.y} onChange={onChange}/></span>
-			<span>z: <input type="number" data-key='z' value={props.property.z} onChange={onChange}/></span>
+		<div className='ui-group'>
+			<span className='ui-label'>{props.label}</span>
+			<div className='ui-input ui-vector-input'>
+				<div className='ui-element ui-numeric-input' placeholder='x'>
+					<input type="number" data-key='x' value={props.property.x} onChange={onChange}/>
+				</div>
+				<div className='ui-element ui-numeric-input' placeholder='y'>
+					<input type="number" data-key='y' value={props.property.y} onChange={onChange}/>
+				</div>
+				<div className='ui-element ui-numeric-input' placeholder='z'>
+					<input type="number" data-key='z' value={props.property.z} onChange={onChange}/>
+				</div>
+			</div>
 		</div>
 	)
 }

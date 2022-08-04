@@ -1,4 +1,4 @@
-import { Vector2, Vector3 } from 'three';
+import { Vector2, Vector3, Vector4 } from 'three';
 import { SceneObject } from '../../../../types/scene';
 import { createUUID } from '../../core/id';
 import Signal from '../../core/signal';
@@ -51,13 +51,18 @@ class SceneService {
 	}
 
 	rpc_createObject(objStr: string, instanceID: string) {
-		console.log(instanceID);
 		var so: SceneObject = {
 			instanceID: instanceID,
 			name: objStr,
 			transform: {
 				position: new Vector3(),
 				rotation: new Vector3()
+			},
+			image: {
+				width: 1,
+				height: 1,
+				radius: new Vector4(0, 0, 0, 0),
+				borderWidth: 0
 			}
 		}
 

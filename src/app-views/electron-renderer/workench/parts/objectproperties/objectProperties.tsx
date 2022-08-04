@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { SceneObject } from '../../../../../types/scene'
 import { PropsWithService, withServices } from '../../../services/serviceContext'
 import PartHeader from '../../ui/partHeader/partHeader'
+import ImageDrawer from './objectDrawer/imageDrawer'
 import TransformDrawer from './objectDrawer/transformDrawer'
 import PropertiesProvider from './propertiesContext'
 
@@ -53,10 +54,10 @@ class ObjectProperties extends React.Component<PropsWithService, IState> {
 
 		return (
 			<>
-				<div>{selected.name}</div>
-				<div>{selected.transform.position.x}</div>
+				<div className='object-name'>{selected.name}</div>
 				<PropertiesProvider properties={selected}>
 					<TransformDrawer onChange={sceneService.rpc_updateObject} />
+					<ImageDrawer onChange={sceneService.rpc_updateObject} />
 				</PropertiesProvider>
 			</>
 		);

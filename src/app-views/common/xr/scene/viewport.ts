@@ -28,10 +28,19 @@ class Viewport extends BaseScene {
 	}
 
 	onSOUpdated_handler = (so: SceneObject) => {
-		console.log(so.instanceID);
+		console.log(so);
 		const obj = this._content.get(so.instanceID);
 		obj.position.set(so.transform.position.x, so.transform.position.y, so.transform.position.z);
 		obj.rotation.set(so.transform.rotation.x * Math.PI / 180, so.transform.rotation.y * Math.PI / 180, so.transform.rotation.z * Math.PI / 180);
+
+		obj.Width = so.image.width;
+		obj.Height = so.image.height;
+		obj.BorderWidth = so.image.borderWidth;
+		obj.CornerTL = so.image.radius.x;
+		obj.CornerTR = so.image.radius.y;
+		obj.CornerBR = so.image.radius.z;
+		obj.CornerBL = so.image.radius.w;
+		obj.rebuild();
 	}
 
 	layout() {

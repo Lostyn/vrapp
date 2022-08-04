@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Vector3 } from 'three'
 import { PropsWithProperties, withProperties } from '../propertiesContext'
 import Vector3Drawer from './vector3Drawer'
@@ -9,6 +9,7 @@ type IProps = PropsWithProperties & {
 
 const TransformDrawer = (props: IProps) => {
 	const {transform, instanceID} = props;
+	const [open, setOpen] = useState<boolean>(true);
 
 	const onChangePosition = (pos: Vector3) => {
 		props.onChange(instanceID, {
@@ -30,9 +31,16 @@ const TransformDrawer = (props: IProps) => {
 
 	return (
 		<>
-			<div>Transform</div>
-			<Vector3Drawer onChange={onChangePosition} property={transform.position} />
-			<Vector3Drawer onChange={onChangeRotation} property={transform.rotation} />
+			<div className='property-header' onClick={() => setOpen(!open)}>
+				<span>{open ? "-" : "+"} </span>
+				Transform
+			</div>
+			{ open && (
+				<>
+					<Vector3Drawer label="Position" onChange={onChangePosition} property={transform.position} />
+					<Vector3Drawer label="Rotation" onChange={onChangeRotation} property={transform.rotation} />
+				</>
+			)}
 		</>
 	)
 }

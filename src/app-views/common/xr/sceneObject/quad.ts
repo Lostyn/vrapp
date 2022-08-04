@@ -209,8 +209,8 @@ class Quad extends Mesh {
 
 		this.width = width;
 		this.height = height;
-		this.radius = new Vector4(0.1, 0.1, 0.1, 0.1);
-		this.borderWidth = 1;
+		this.radius = new Vector4(0, 0, 0, 0);
+		this.borderWidth = 0;
 
 		this.geometry.setIndex([0, 2, 1, 2, 3, 1]);
 		this.updateVertex();

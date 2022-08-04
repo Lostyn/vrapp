@@ -5,4 +5,17 @@
 	height: 100%;
 	width: var(--object-properties-width);
 	background-color: var(--base-background-color);
+	color: white;
+	font-weight: 300;
+	font-size: 13px;
+
+	& .object-name {
+		padding: 4px 4px 4px 10px;
+	}
+
+	& .property-header {
+
+		padding: 4px 4px 4px 10px;
+		background-color: var(--darker-background-color);
+	}
 }

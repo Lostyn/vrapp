@@ -1,9 +1,10 @@
 import React, {createContext, useCallback, useState} from 'react';
-import { SceneObject, Transform } from '../../../../../types/scene';
+import { Image, SceneObject, Transform } from '../../../../../types/scene';
 
 export interface PropsWithProperties {
 	instanceID: string,
-	transform: Transform
+	transform: Transform,
+	image: Image
 }
 
 const PropertiesContext = createContext({});
