@@ -50,9 +50,10 @@ class SceneService {
 		});
 	}
 
-	rpc_createObject(objStr: string) {
+	rpc_createObject(objStr: string, instanceID: string) {
+		console.log(instanceID);
 		var so: SceneObject = {
-			instanceID: createUUID(),
+			instanceID: instanceID,
 			name: objStr,
 			transform: {
 				position: new Vector3(),
@@ -65,8 +66,8 @@ class SceneService {
 		this.selectObject(so.instanceID);
 	}
 
-	rpc_updateObject(instanceId: string, patch: any) {
-		const obj = this.content.find(o => o.instanceID == instanceId);
+	rpc_updateObject(instanceID: string, patch: any) {
+		const obj = this.content.find(o => o.instanceID == instanceID);
 		if (obj != undefined) {
 			Object.assign(obj, patch);
 			this._onSOUpdated.fire(obj);

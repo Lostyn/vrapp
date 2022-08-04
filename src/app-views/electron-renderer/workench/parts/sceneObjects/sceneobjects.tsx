@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SceneObject } from '../../../../../types/scene';
+import { createUUID } from '../../../../common/core/id';
 import { PropsWithService, withServices } from '../../../services/serviceContext';
 import PartHeader from '../../ui/partHeader/partHeader';
 import SceneObjectLine from './sceneobjectsline';
@@ -12,7 +13,7 @@ const SceneObjects = (props: IProps) => {
 	const { sceneService } = props.services;
 
 	const createTest = () => {
-		sceneService.rpc_createObject('quad');
+		sceneService.rpc_createObject('quad', createUUID());
 	};
 
 	const [selected, setSelected] = useState<string>("");
