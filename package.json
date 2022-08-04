@@ -19,6 +19,7 @@
     "@types/react": "^18.0.15",
     "@types/three": "^0.141.0",
     "@types/websocket": "^1.0.5",
+    "babelify": "^10.0.0",
     "browser-sync": "^2.27.10",
     "browserify": "^17.0.0",
     "electron": "^16.0.7",

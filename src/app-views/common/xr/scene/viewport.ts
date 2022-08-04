@@ -28,6 +28,7 @@ class Viewport extends BaseScene {
 	}
 
 	onSOUpdated_handler = (so: SceneObject) => {
+		console.log(so.instanceID);
 		const obj = this._content.get(so.instanceID);
 		obj.position.set(so.transform.position.x, so.transform.position.y, so.transform.position.z);
 		obj.rotation.set(so.transform.rotation.x * Math.PI / 180, so.transform.rotation.y * Math.PI / 180, so.transform.rotation.z * Math.PI / 180);

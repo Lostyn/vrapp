@@ -1,23 +1,28 @@
 import * as THREE from 'three';
-import BaseScene from '../../common/xr/scene/baseScene';
+import SceneService from '../../common/services/scene/sceneService';
+import Viewport from '../../common/xr/scene/viewport';
 import { VRButton } from '../vr/VRButton';
 
-class VRViewport extends BaseScene {
+class VRViewport extends Viewport {
 	_vrButton: VRButton;
 	_controller: THREE.XRTargetRaySpace;
 
-	constructor(parent: HTMLElement) {
-		super(parent);
+	constructor(parent: HTMLElement, sceneService: SceneService) {
+		super(parent, sceneService);
 
+		this.camera.lookAt(0, 1.7, 0);
 		this._vrButton = new VRButton(this.renderer, parent);
 	}
 
 	layout() {
 		super.layout();
-
 		this.renderer.xr.enabled = true;
 
 		this.setControllers();
+	}
+
+	render = () => {
+		super.render();
 	}
 
 	setControllers() {
@@ -30,8 +35,6 @@ class VRViewport extends BaseScene {
 		// 	this._controller.remove(this._controller.children[0]);
 		// });
 		this.scene.add(this._controller);
-
-
 	}
 
 	buildController = (data) => {
