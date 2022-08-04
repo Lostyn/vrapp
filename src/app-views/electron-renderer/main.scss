@@ -14,6 +14,7 @@ html, body, #workbench {
 	height: 100%;
 	overflow: hidden;
 	margin: 0;
+	font-family: 'open-sans';
 }
 
 #viewport {
@@ -35,6 +36,7 @@ html, body, #workbench {
 :root {
 	--base-background-color: #24252E;
 	--over-background-color: #1f1f25;
+	--darker-background-color: #111218;
 	--accent-color-primary: #0a7ba3;
 
 	--sceneobject-width: 250px;

@@ -27,7 +27,7 @@ class SocketServer {
 			})
 
 			socket.on('scene:rpc', (msg) => {
-				console.log(msg);
+				// console.log(msg);
 				this._io.emit('scene:rpc', msg);
 			})
 

@@ -1,3 +1,4 @@
+import { Vector2, Vector3 } from 'three';
 import { SceneObject } from '../../../../types/scene';
 import { createUUID } from '../../core/id';
 import Signal from '../../core/signal';
@@ -11,6 +12,9 @@ class SceneService {
 
 	private _onSOAdded: Signal<SceneObject> = new Signal<SceneObject>();
 	public get onSOAdded() { return this._onSOAdded; }
+
+	private _onSOUpdated: Signal<SceneObject> = new Signal<SceneObject>();
+	public get onSOUpdated() { return this._onSOUpdated; }
 
 	private _onSelect: Signal = new Signal();
 	public get onSelect() { return this._onSelect; }
@@ -50,12 +54,23 @@ class SceneService {
 		var so: SceneObject = {
 			instanceID: createUUID(),
 			name: objStr,
-			transform: { x: 0, y: 0, z: 0 }
+			transform: {
+				position: new Vector3(),
+				rotation: new Vector3()
+			}
 		}
 
 		this.content.push(so);
 		this._onSOAdded.fire(so);
 		this.selectObject(so.instanceID);
+	}
+
+	rpc_updateObject(instanceId: string, patch: any) {
+		const obj = this.content.find(o => o.instanceID == instanceId);
+		if (obj != undefined) {
+			Object.assign(obj, patch);
+			this._onSOUpdated.fire(obj);
+		}
 	}
 
 	selectObject(instanceId: string) {

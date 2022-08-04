@@ -1,5 +1,12 @@
+import { Vector3 } from 'three';
+
 export type SceneObject = {
 	instanceID: string,
 	name: string,
-	transform: { x: number, y: number, z: number };
+	transform: Transform;
+}
+
+export type Transform = {
+	position: Vector3;
+	rotation: Vector3;
 }

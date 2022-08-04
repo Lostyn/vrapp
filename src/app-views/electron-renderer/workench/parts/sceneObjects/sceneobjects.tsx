@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SceneObject } from '../../../../../types/scene';
 import { PropsWithService, withServices } from '../../../services/serviceContext';
+import PartHeader from '../../ui/partHeader/partHeader';
 import SceneObjectLine from './sceneobjectsline';
 
 type IProps = PropsWithService & {
@@ -33,6 +34,7 @@ const SceneObjects = (props: IProps) => {
 
 	return (
 		<div id="scene-objects">
+			<PartHeader>Scene Objects</PartHeader>
 			{ items.map( so =>
 					<SceneObjectLine
 						key={so.instanceID}

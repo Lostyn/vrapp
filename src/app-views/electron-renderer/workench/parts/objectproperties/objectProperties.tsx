@@ -1,34 +1,77 @@
 import React, { useEffect, useState } from 'react'
 import { SceneObject } from '../../../../../types/scene'
 import { PropsWithService, withServices } from '../../../services/serviceContext'
+import PartHeader from '../../ui/partHeader/partHeader'
+import TransformDrawer from './objectDrawer/transformDrawer'
+import PropertiesProvider from './propertiesContext'
 
-type IProps = PropsWithService & {
 
+type IState = {
+	selected: SceneObject
 }
 
-const ObjectProperties = (props: IProps) => {
-	const { sceneService } = props.services;
+class ObjectProperties extends React.Component<PropsWithService, IState> {
+	_unregister: {(): void}[];
 
-	const[ selected, setSelected ] = useState<SceneObject>(null);
+	constructor(props: PropsWithService) {
+		super(props);
 
-	useEffect(() => {
-		const onSelect = () => {
-			const so = sceneService.content.find( o => o.instanceID == sceneService.selected)
-			setSelected(so);
+		const {sceneService} = props.services;
+		const so = sceneService.content.find( o => o.instanceID == sceneService.selected);
+
+		this.state = {
+			selected: so
 		}
+	}
 
-		const unregister = [
-			sceneService.onSelect.register(onSelect)
+	onSelect = () => {
+		const {sceneService} = this.props.services;
+		const selected = sceneService.content.find( o => o.instanceID == sceneService.selected);
+		this.setState({selected})
+	}
+
+	renderEmpty = () => {
+		return <div/>;
+	}
+
+	componentDidMount() {
+		const {sceneService} = this.props.services;
+
+		this._unregister = [
+			sceneService.onSelect.register(this.onSelect),
+			sceneService.onSOUpdated.register(this.onSelect)
 		];
-		return () => unregister.forEach( u => u() );
-	})
+	}
 
-	if (selected == null) return <div id="object-properties"></div>
+	componentWillUnmount(): void {
+		this._unregister.forEach( u => u() );
+	}
+
+	renderSelected = () => {
+		const { selected } = this.state;
+		const {sceneService} = this.props.services;
+
+		return (
+			<>
+				<div>{selected.name}</div>
+				<div>{selected.transform.position.x}</div>
+				<PropertiesProvider properties={selected}>
+					<TransformDrawer onChange={sceneService.rpc_updateObject} />
+				</PropertiesProvider>
+			</>
+		);
+	}
+
+  render() {
+	const { selected } = this.state;
 	return (
 		<div id="object-properties">
-			{selected.name}
+			<PartHeader>Object Properties</PartHeader>
+			{selected == null ? this.renderEmpty() : this.renderSelected()}
 		</div>
-	);
+	)
+  }
 }
+
 
 export default withServices(ObjectProperties);

@@ -41,32 +41,37 @@ class Quad extends Mesh {
 
 	set Width(value: number) {
 		this.width = Math.max(value, 0);
-		this.updateVertex();
+		// this.updateVertex();
 	}
 
 	set Height(value: number) {
 		this.height = Math.max(value, 0);;
-		this.updateVertex();
+		// this.updateVertex();
+	}
+
+	set BorderWidth(value: number) {
+		this.borderWidth = Math.max(value, 0);
+		// this.updateVertex();
 	}
 
 	set CornerTL(value: number) {
 		this.radius.x = value;
-		this.updateVertex();
+		// this.updateVertex();
 	}
 
 	set CornerTR(value: number) {
 		this.radius.y = value;
-		this.updateVertex();
+		// this.updateVertex();
 	}
 
 	set CornerBR(value: number) {
 		this.radius.z = value;
-		this.updateVertex();
+		// this.updateVertex();
 	}
 
 	set CornerBL(value: number) {
 		this.radius.w = value;
-		this.updateVertex();
+		// this.updateVertex();
 	}
 
 	constructor(width: number, height: number) {
@@ -211,7 +216,11 @@ class Quad extends Mesh {
 		this.updateVertex();
 	}
 
-	updateVertex() {
+	rebuild() {
+		this.updateVertex();
+	}
+
+	private updateVertex() {
 		const info = this.calculateInfo();
 		this.encodeInfoIntoVertices(info);
 
