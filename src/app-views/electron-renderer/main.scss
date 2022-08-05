@@ -33,6 +33,12 @@ html, body, #workbench {
 	height: 100%;
 }
 
+[class^="icon-"], [class*=" icon-"] {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 :root {
 	--gray--background-color: #44464C;
 	--base-background-color: #262832;
@@ -42,7 +48,7 @@ html, body, #workbench {
 	--accent-color-primary: #0a7ba3;
 
 	--sceneobject-width: 250px;
-	--object-properties-width: 250px;
+	--object-properties-width: 300px;
 
 }
 

@@ -35,7 +35,7 @@ const SceneObjects = (props: IProps) => {
 
 	return (
 		<div id="scene-objects">
-			<PartHeader>Scene Objects</PartHeader>
+			<PartHeader><i className='icon-list'/>Scene Objects</PartHeader>
 			{ items.map( so =>
 					<SceneObjectLine
 						key={so.instanceID}

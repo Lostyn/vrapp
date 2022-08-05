@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { SceneObject } from '../../../../../types/scene'
 import { PropsWithService, withServices } from '../../../services/serviceContext'
 import PartHeader from '../../ui/partHeader/partHeader'
-import ImageDrawer from './objectDrawer/imageDrawer'
-import TransformDrawer from './objectDrawer/transformDrawer'
+import ImageDrawer from './objectDrawer/component/imageDrawer'
+import TransformDrawer from './objectDrawer/component/transformDrawer'
 import PropertiesProvider from './propertiesContext'
 
 
@@ -67,7 +67,7 @@ class ObjectProperties extends React.Component<PropsWithService, IState> {
 	const { selected } = this.state;
 	return (
 		<div id="object-properties">
-			<PartHeader>Object Properties</PartHeader>
+			<PartHeader><i className='icon-code'/>Object Properties</PartHeader>
 			{selected == null ? this.renderEmpty() : this.renderSelected()}
 		</div>
 	)

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Vector3 } from 'three'
-import { PropsWithProperties, withProperties } from '../propertiesContext'
-import NumberDrawer from './numberDrawer'
-import Vector3Drawer from './vector3Drawer'
+import { Vector4 } from 'three'
+import { PropsWithProperties, withProperties } from '../../propertiesContext'
+import NumberDrawer from '../primitive/numberDrawer'
+import Vector4Drawer from '../primitive/vector4Drawer'
+import ComponentHeader from '../ui/componentHeader'
 
 type IProps = PropsWithProperties & {
 	onChange: (instanceId: string, patch:any) => void;
@@ -33,17 +34,19 @@ const ImageDrawer = (props: IProps) => {
 		props.onChange(instanceID, getPath('borderWidth', value));
 	}
 
+	const onRadiusChange = (value: Vector4) => {
+		props.onChange(instanceID, getPath('radius', value));
+	}
+
 	return (
 		<>
-			<div className='property-header' onClick={() => setOpen(!open)}>
-				<span>{open ? "-" : "+"} </span>
-				Image
-			</div>
+			<ComponentHeader open={open} setOpen={setOpen}>Image</ComponentHeader>
 			{ open && (
 				<>
 					<NumberDrawer label='Width' onChange={onWidthChange} property={image.width} />
 					<NumberDrawer label='Height' onChange={onHeightChange} property={image.height} />
 					<NumberDrawer label='Border width' onChange={onBorderChange} property={image.borderWidth} />
+					<Vector4Drawer label='Radius' onChange={onRadiusChange} property={image.radius} />
 				</>
 			)}
 		</>

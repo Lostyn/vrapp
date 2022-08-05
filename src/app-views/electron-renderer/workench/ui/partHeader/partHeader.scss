@@ -10,6 +10,8 @@
 		padding: 4px 30px 4px 8px;
 		width: fit-content;
 		background-color: var(--base-background-color);
+		display: flex;
+		gap: 10px;
 
 		&::before {
 			content:'';

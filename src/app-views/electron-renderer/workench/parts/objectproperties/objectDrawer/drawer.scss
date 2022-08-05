@@ -1,7 +1,7 @@
 .ui-group {
 	display: flex;
 	margin: 3px 10px;
-    min-height: 24px;
+    min-height: 20px;
 	align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -20,10 +20,10 @@
 		& .ui-element {
 			display: inline-block;
 			box-sizing: border-box;
-			min-height: 24px;
-    		height: 24px;
+			min-height: 20px;
+    		height: 20px;
 
-			margin: 6px 3px;
+			margin: 3px 3px;
 			background-color: var(--dark-background-color);
 		}
 
@@ -52,7 +52,7 @@
 
 		& .ui-numeric-input {
 			flex: 1;
-    		margin: 6px 3px;
+    		margin: 3px 3px;
 			position: relative;
 
 			&::after {

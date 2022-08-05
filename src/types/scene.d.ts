@@ -10,6 +10,7 @@ export type SceneObject = {
 export type Transform = {
 	position: Vector3;
 	rotation: Vector3;
+	scale: Vector3;
 }
 export type Image = {
 	width: number;
