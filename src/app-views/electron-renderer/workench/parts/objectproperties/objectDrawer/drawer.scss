@@ -25,6 +25,18 @@
 
 			margin: 3px 3px;
 			background-color: var(--dark-background-color);
+
+			&[placeholder]:not(:hover)::after {
+				content: attr(placeholder);
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0 8px;
+				line-height: 22px;
+				font-size: 10px;
+				white-space: nowrap;
+				pointer-events: none;
+			}
 		}
 
 		& input {
@@ -55,16 +67,24 @@
     		margin: 3px 3px;
 			position: relative;
 
-			&::after {
-				content: attr(placeholder);
+			& .ui-numeric-slider {
+				display: none;
 				position: absolute;
-				top: 0;
-				right: 0;
-				padding: 0 8px;
-				line-height: 22px;
-				font-size: 10px;
-				white-space: nowrap;
-				pointer-events: none;
+				width: 10px;
+				height: 10px;
+				right: 10px;
+				z-index: 9999;
+				transform: translateY(-50%);
+				top: 50%;
+				cursor: ew-resize;
+			}
+
+			&:hover .ui-numeric-slider {
+				display: block;
+
+				&.drag {
+					color: #00ff00;
+				}
 			}
 		}
 	}
