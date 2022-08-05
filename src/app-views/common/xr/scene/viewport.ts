@@ -33,6 +33,7 @@ class Viewport extends BaseScene {
 		obj.rotation.set(so.transform.rotation.x * Math.PI / 180, so.transform.rotation.y * Math.PI / 180, so.transform.rotation.z * Math.PI / 180);
 		obj.scale.set(so.transform.scale.x, so.transform.scale.y, so.transform.scale.z);
 
+		obj.Color = so.image.color;
 		obj.Width = so.image.width;
 		obj.Height = so.image.height;
 		obj.BorderWidth = so.image.borderWidth;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Vector4 } from 'three'
+import { Color, Vector4 } from 'three'
 import { PropsWithProperties, withProperties } from '../../propertiesContext'
+import ColorDrawer from '../primitive/colorDrawer'
 import NumberDrawer from '../primitive/numberDrawer'
 import Vector4Drawer from '../primitive/vector4Drawer'
 import ComponentHeader from '../ui/componentHeader'
@@ -13,7 +14,7 @@ const ImageDrawer = (props: IProps) => {
 	const {image, instanceID} = props;
 	const [open, setOpen] = useState<boolean>(true);
 
-	const getPath = (key, value) => {
+	const getPatch = (key, value) => {
 		return {
 			image: {
 				...image,
@@ -23,19 +24,23 @@ const ImageDrawer = (props: IProps) => {
 	}
 
 	const onWidthChange = (value) => {
-		props.onChange(instanceID, getPath('width', value));
+		props.onChange(instanceID, getPatch('width', value));
 	}
 
 	const onHeightChange = (value) => {
-		props.onChange(instanceID, getPath('height', value));
+		props.onChange(instanceID, getPatch('height', value));
 	}
 
 	const onBorderChange = (value) => {
-		props.onChange(instanceID, getPath('borderWidth', value));
+		props.onChange(instanceID, getPatch('borderWidth', value));
 	}
 
 	const onRadiusChange = (value: Vector4) => {
-		props.onChange(instanceID, getPath('radius', value));
+		props.onChange(instanceID, getPatch('radius', value));
+	}
+
+	const onColorChange = (value: Color) => {
+		props.onChange(instanceID, getPatch('color', value));
 	}
 
 	return (
@@ -43,6 +48,7 @@ const ImageDrawer = (props: IProps) => {
 			<ComponentHeader open={open} setOpen={setOpen}>Image</ComponentHeader>
 			{ open && (
 				<>
+					<ColorDrawer label='color' onChange={onColorChange} property={image.color} />
 					<NumberDrawer label='Width' onChange={onWidthChange} property={image.width} />
 					<NumberDrawer label='Height' onChange={onHeightChange} property={image.height} />
 					<NumberDrawer label='Border width' onChange={onBorderChange} property={image.borderWidth} />

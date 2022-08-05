@@ -1,4 +1,4 @@
-import { BufferGeometry, DoubleSide, Float32BufferAttribute, Mesh, MeshBasicMaterial, ShaderMaterial, Vector2, Vector3, Vector4 } from 'three';
+import { BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Mesh, MeshBasicMaterial, Shader, ShaderMaterial, Vector2, Vector3, Vector4 } from 'three';
 
 class Vertice {
 	pos: Vector3;
@@ -25,12 +25,13 @@ class Vertice {
 	get uvs4Array(): number[] { return [this.uv4.x, this.uv4.y]; }
 }
 
-class Quad extends Mesh {
+class Quad extends Mesh<BufferGeometry, ShaderMaterial> {
 
 	width: number;
 	height: number;
 	radius: Vector4;
 	borderWidth: number;
+	color: Color;
 
 	vertices: Vertice[] = [
 		new Vertice(0, 0, 0, 1),
@@ -74,10 +75,15 @@ class Quad extends Mesh {
 		// this.updateVertex();
 	}
 
+	set Color(value: string) {
+		this.color.setHex(parseInt(value));
+	}
+
 	constructor(width: number, height: number) {
 		const material = new ShaderMaterial({
 			uniforms: {
 				position: { value: new Vector3() },
+				color: { value: new Color(0xffffff) },
 				uv: { value: new Vector2() },
 				uv2: { value: new Vector2() },
 				uv3: { value: new Vector2() },
@@ -92,7 +98,7 @@ class Quad extends Mesh {
 				attribute vec2 uv3;
 				attribute vec2 uv4;
 
-
+				varying vec3 baseColor;
 				varying vec2 texCoords;
 				varying vec2 wh;
 				varying vec4 radius;
@@ -125,6 +131,8 @@ class Quad extends Mesh {
 			fragmentShader: `
 				precision highp float;
 
+
+				uniform vec3 color;
 				varying vec2 texCoords;
 				varying vec2 wh;
 				varying vec4 radius;
@@ -193,7 +201,6 @@ class Quad extends Mesh {
 
 				void main(void) {
 					float v = visible(texCoords * wh, radius, wh);
-					vec3 color = vec3(1, 0, 0);
 
 					float l = lineWeight;
 					if (lineWeight > 0.0) {
@@ -211,6 +218,7 @@ class Quad extends Mesh {
 		this.height = height;
 		this.radius = new Vector4(0, 0, 0, 0);
 		this.borderWidth = 0;
+		this.color = new Color(1, 1, 1);
 
 		this.geometry.setIndex([0, 2, 1, 2, 3, 1]);
 		this.updateVertex();
@@ -245,11 +253,13 @@ class Quad extends Mesh {
 			uvs4.push(...this.vertices[i].uvs4Array);
 		}
 
-		this.geometry.attributes.position = new Float32BufferAttribute(positions, 3)
-		this.geometry.attributes.uv = new Float32BufferAttribute(uvs, 2)
-		this.geometry.attributes.uv2 = new Float32BufferAttribute(uvs2, 2)
-		this.geometry.attributes.uv3 = new Float32BufferAttribute(uvs3, 2)
-		this.geometry.attributes.uv4 = new Float32BufferAttribute(uvs4, 2)
+		this.geometry.attributes.position = new Float32BufferAttribute(positions, 3);
+		this.geometry.attributes.uv = new Float32BufferAttribute(uvs, 2);
+		this.geometry.attributes.uv2 = new Float32BufferAttribute(uvs2, 2);
+		this.geometry.attributes.uv3 = new Float32BufferAttribute(uvs3, 2);
+		this.geometry.attributes.uv4 = new Float32BufferAttribute(uvs4, 2);
+
+		this.material.uniforms.color.value = this.color;
 	}
 
 	calculateInfo() {

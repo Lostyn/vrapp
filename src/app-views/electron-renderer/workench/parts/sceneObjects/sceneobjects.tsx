@@ -22,13 +22,17 @@ const SceneObjects = (props: IProps) => {
 	}
 
 	const [ items, setItems ] = useState<SceneObject[]>([]);
+	const [ tic, setTic ] = useState<boolean>();
+
 	useEffect( () => {
 		const onAdd = () => { setItems(sceneService.content); }
 		const onSelect = () => { setSelected(sceneService.selected); }
+		const onUpdate = () => setTic(!tic);
 
 		const unregister = [
 			sceneService.onSOAdded.register(onAdd),
-			sceneService.onSelect.register(onSelect)
+			sceneService.onSelect.register(onSelect),
+			sceneService.onSOUpdated.register(onUpdate)
 		];
 		return () => unregister.forEach( u => u() );
 	})

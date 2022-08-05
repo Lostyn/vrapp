@@ -4,6 +4,7 @@ import { PropsWithService, withServices } from '../../../services/serviceContext
 import PartHeader from '../../ui/partHeader/partHeader'
 import ImageDrawer from './objectDrawer/component/imageDrawer'
 import TransformDrawer from './objectDrawer/component/transformDrawer'
+import StringDrawer from './objectDrawer/primitive/stringDrawer'
 import PropertiesProvider from './propertiesContext'
 
 
@@ -48,13 +49,20 @@ class ObjectProperties extends React.Component<PropsWithService, IState> {
 		this._unregister.forEach( u => u() );
 	}
 
+	onNameChange = (value:string) => {
+		const {sceneService} = this.props.services;
+		const { selected } = this.state;
+
+		sceneService.rpc_updateObject(selected.instanceID, { name: value })
+	}
+
 	renderSelected = () => {
 		const { selected } = this.state;
 		const {sceneService} = this.props.services;
 
 		return (
 			<>
-				<div className='object-name'>{selected.name}</div>
+				<StringDrawer label='Name' property={selected.name} onChange={this.onNameChange}/>
 				<PropertiesProvider properties={selected}>
 					<TransformDrawer onChange={sceneService.rpc_updateObject} />
 					<ImageDrawer onChange={sceneService.rpc_updateObject} />

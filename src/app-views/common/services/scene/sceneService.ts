@@ -1,4 +1,4 @@
-import { Vector2, Vector3, Vector4 } from 'three';
+import { Color, Vector2, Vector3, Vector4 } from 'three';
 import { SceneObject } from '../../../../types/scene';
 import { createUUID } from '../../core/id';
 import Signal from '../../core/signal';
@@ -63,7 +63,8 @@ class SceneService {
 				width: 1,
 				height: 1,
 				radius: new Vector4(0, 0, 0, 0),
-				borderWidth: 0
+				borderWidth: 0,
+				color: "0xffffff"
 			}
 		}
 
