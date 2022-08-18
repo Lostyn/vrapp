@@ -1,0 +1,92 @@
+.ui-group {
+	display: flex;
+	margin: 3px 10px;
+    min-height: 20px;
+	align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+	position: relative;
+
+	& .ui-label {
+		font-size: 12px;
+    	width: 30%;
+		margin: 0;
+		white-space: nowrap;
+	}
+
+	& .ui-input {
+		border-radius: 2px;
+
+		& .ui-element {
+			display: inline-block;
+			box-sizing: border-box;
+			min-height: 20px;
+    		height: 20px;
+
+			margin: 3px 3px;
+			background-color: var(--dark-background-color);
+
+			&[placeholder]:not(:hover):not(.drag)::after {
+				content: attr(placeholder);
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0 8px;
+				line-height: 22px;
+				font-size: 10px;
+				white-space: nowrap;
+				pointer-events: none;
+			}
+
+			&:hover .ui-numeric-slider {
+				display: block;
+			}
+
+			&.drag .ui-numeric-slider {
+				display: block;
+				color: #00ff00;
+			}
+		}
+
+		& input {
+			height: 100%;
+			width: calc(100% - 16px);
+			padding: 0 6px;
+			line-height: 1;
+			background: transparent;
+			border: none;
+			outline: none;
+			box-shadow: none;
+			color: white;
+			border-bottom: 1px solid var(--gray--background-color);
+
+			&:focus {
+				border-bottom: 1px solid var(--accent-color-primary);
+			}
+		}
+	}
+
+	& .ui-vector-input {
+		display: flex;
+		flex: 1;
+		align-items: center;
+
+		& .ui-numeric-input {
+			flex: 1;
+    		margin: 3px 3px;
+			position: relative;
+
+			& .ui-numeric-slider {
+				display: none;
+				position: absolute;
+				width: 10px;
+				height: 10px;
+				right: 10px;
+				z-index: 9999;
+				transform: translateY(-50%);
+				top: 50%;
+				cursor: ew-resize;
+			}
+		}
+	}
+}

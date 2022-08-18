@@ -52,8 +52,8 @@ class Main {
 			// TODO: instantiationService ?
 			this.mainWindow = new BrowserWindow(
 				{
-					width: 800,
-					height: 185,
+					width: this.isDev ? 1600 : 1200,
+					height: 720,
 					webPreferences: {
 						nodeIntegration: true,
 						contextIsolation: false

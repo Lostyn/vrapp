@@ -1,13 +1,13 @@
 import gulp, { on } from 'gulp';
-import babel from "gulp-babel";
-import { script } from '../../globs';
+import babelify from 'babelify'
 import browserify from "browserify";
 import tsify from "tsify";
 import source from "vinyl-source-stream";
 
 export default function webScripts() {
 	return browserify()
-		.plugin(tsify, {})
+		.plugin(tsify, { target: 'es6' })
+		.transform(babelify, { extensions: ['.tsx', '.ts'] })
 		.add(`src/app-views/web/index.ts`)
 		.bundle()
 		.on('error', err => console.error(err))

@@ -1,0 +1,25 @@
+.part-header {
+	background-color: var(--darker-background-color);
+	color: white;
+	font-weight: 300;
+	font-size: 12px;
+	padding-top: 4px;
+
+	div {
+		position: relative;
+		padding: 4px 30px 4px 8px;
+		width: fit-content;
+		background-color: var(--base-background-color);
+		display: flex;
+		gap: 10px;
+
+		&::before {
+			content:'';
+			position: absolute;
+			right: 0;
+			top: 0;
+			border-top: 25px solid var(--darker-background-color);
+			border-left: 10px solid transparent;
+		}
+	}
+}

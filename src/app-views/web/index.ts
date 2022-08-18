@@ -17,7 +17,7 @@ class App {
 		this._socket = new SocketClientService(host, 'web');
 		this._sceneService = new SceneService(this._socket);
 
-		this._viewport = new VRViewport(container);
+		this._viewport = new VRViewport(container, this._sceneService);
 	}
 }
 
