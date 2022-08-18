@@ -76,6 +76,8 @@ class Quad extends Mesh<BufferGeometry, ShaderMaterial> {
 	}
 
 	set Color(value: string) {
+		if (value.startsWith('#'))
+			value = `0x${value.slice(1)}`
 		this.color.setHex(parseInt(value));
 	}
 
@@ -258,6 +260,7 @@ class Quad extends Mesh<BufferGeometry, ShaderMaterial> {
 		this.geometry.attributes.uv2 = new Float32BufferAttribute(uvs2, 2);
 		this.geometry.attributes.uv3 = new Float32BufferAttribute(uvs3, 2);
 		this.geometry.attributes.uv4 = new Float32BufferAttribute(uvs4, 2);
+
 
 		this.material.uniforms.color.value = this.color;
 	}
