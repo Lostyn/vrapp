@@ -13,13 +13,6 @@ const Vector4Drawer = (props: IProps) => {
 
 	const holders = props.placeHolders || ['x', 'y', 'z', 'w'];
 
-	// const onChange = (evt) => {
-	// 	const attr = evt.target.getAttribute('data-key');
-	// 	const result = new Vector4(props.property.x, props.property.y, props.property.z, props.property.w);
-	// 	result[attr] = parseFloat(evt.target.value);
-	// 	props.onChange(result);
-	// }
-
 	const onChange = (key, value) => {
 		const result = new Vector4(props.property.x, props.property.y, props.property.z, props.property.w);
 		result[key] = parseFloat(value);
@@ -36,16 +29,16 @@ const Vector4Drawer = (props: IProps) => {
 			<span className='ui-label'>{props.label}</span>
 			<div className='ui-input ui-vector-input'>
 				<NumericInput
-					placeholder='x' value={props.property.x.toString()} onChange={onChangeX}
+					placeholder={holders[0]} value={props.property.x.toString()} onChange={onChangeX}
 				/>
 				<NumericInput
-					placeholder='y' value={props.property.y.toString()} onChange={onChangeY}
+					placeholder={holders[1]} value={props.property.y.toString()} onChange={onChangeY}
 				/>
 				<NumericInput
-					placeholder='z' value={props.property.z.toString()} onChange={onChangeZ}
+					placeholder={holders[2]} value={props.property.z.toString()} onChange={onChangeZ}
 				/>
 				<NumericInput
-					placeholder='w' value={props.property.w.toString()} onChange={onChangeW}
+					placeholder={holders[3]} value={props.property.w.toString()} onChange={onChangeW}
 				/>
 			</div>
 		</div>

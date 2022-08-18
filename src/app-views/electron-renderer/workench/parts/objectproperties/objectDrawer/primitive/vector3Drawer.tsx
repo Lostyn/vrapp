@@ -1,5 +1,6 @@
 import React from 'react'
 import { Vector3 } from 'three';
+import NumericInput from '../inputs/numeric-input';
 
 type IProps = {
 	label: string,
@@ -12,26 +13,24 @@ const Vector3Drawer = (props: IProps) => {
 
 	const holders = props.placeHolders || ['x', 'y', 'z'];
 
-	const onChange = (evt) => {
-		const attr = evt.target.getAttribute('data-key');
+	const onChange = (key, value) => {
 		const result = new Vector3(props.property.x, props.property.y, props.property.z);
-		result[attr] = parseFloat(evt.target.value);
+		result[key] = parseFloat(value);
 		props.onChange(result);
 	}
+
+	const onChangeX = (value) => onChange('x', value);
+	const onChangeY = (value) => onChange('y', value);
+	const onChangeZ = (value) => onChange('z', value);
+
 
 	return (
 		<div className='ui-group'>
 			<span className='ui-label'>{props.label}</span>
 			<div className='ui-input ui-vector-input'>
-				<div className='ui-element ui-numeric-input' placeholder={holders[0]}>
-					<input type="number" data-key='x' value={props.property.x} onChange={onChange}/>
-				</div>
-				<div className='ui-element ui-numeric-input' placeholder={holders[1]}>
-					<input type="number" data-key='y' value={props.property.y} onChange={onChange}/>
-				</div>
-				<div className='ui-element ui-numeric-input' placeholder={holders[2]}>
-					<input type="number" data-key='z' value={props.property.z} onChange={onChange}/>
-				</div>
+				<NumericInput placeholder={holders[0]} value={props.property.x.toString()} onChange={onChangeX} />
+				<NumericInput placeholder={holders[1]} value={props.property.y.toString()} onChange={onChangeY} />
+				<NumericInput placeholder={holders[2]} value={props.property.z.toString()} onChange={onChangeZ} />
 			</div>
 		</div>
 	)
