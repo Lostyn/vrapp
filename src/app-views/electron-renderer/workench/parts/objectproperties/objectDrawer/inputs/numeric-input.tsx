@@ -37,8 +37,11 @@ class NumericInput extends Component<IProps, IState> {
 		evt.preventDefault();
 		evt.stopPropagation();
 
+		var scale = 0.01;
+		if (evt.ctrlKey) scale = 1;
+
 		const b = parseFloat(this.state.value);
-		const v = (b + evt.movementX * 0.01).toFixed(2);
+		const v = (b + evt.movementX * scale).toFixed(2);
 
 		this.setState({
 			value: v
@@ -81,16 +84,16 @@ class NumericInput extends Component<IProps, IState> {
 		const { placeholder} = this.props;
 		const { value, drag } = this.state;
 
-		const ics = cs('ui-numeric-slider icon-h-resize', { drag });
+		const dcs = cs('ui-element ui-numeric-input', { drag });
 		return (
-			<div className='ui-element ui-numeric-input' placeholder={placeholder}>
+			<div className={dcs} placeholder={placeholder}>
 				<input
 					type="text"
 					value={value}
 					onChange={this.onChange}
 					onBlur={this.onBlur}
 				/>
-				<i className={ics}
+				<i className='ui-numeric-slider icon-h-resize'
 					onMouseDown={ this.onDown }
 					/>
 			</div>
