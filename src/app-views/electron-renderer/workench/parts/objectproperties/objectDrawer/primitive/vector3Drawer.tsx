@@ -10,7 +10,6 @@ type IProps = {
 }
 
 const Vector3Drawer = (props: IProps) => {
-
 	const holders = props.placeHolders || ['x', 'y', 'z'];
 
 	const onChange = (key, value) => {

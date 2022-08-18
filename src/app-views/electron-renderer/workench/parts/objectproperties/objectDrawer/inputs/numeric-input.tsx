@@ -80,6 +80,13 @@ class NumericInput extends Component<IProps, IState> {
 		}
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if (this.props.value != prevProps.value) {
+			this.setState({ value: this.props.value })
+		}
+	}
+
+
 	render() {
 		const { placeholder} = this.props;
 		const { value, drag } = this.state;
