@@ -13,18 +13,23 @@ class Viewport extends BaseScene {
 
 		sceneService.onSOAdded.register(this.onSOAdded_handle);
 		sceneService.onSOUpdated.register(this.onSOUpdated_handler);
+
+		this.populate(sceneService.content);
+	}
+
+	populate(objects: SceneObject[]) {
+
+		for (var obj of objects) {
+			this.onSOAdded_handle(obj);
+		}
 	}
 
 	onSOAdded_handle = (so: SceneObject) => {
-		switch (so.name) {
-			case 'quad':
-				var obj = new Quad(2, 1)
-				this._content.set(so.instanceID, obj);
-				this.scene.add(obj);
+		var obj = new Quad(2, 1)
+		this._content.set(so.instanceID, obj);
+		this.scene.add(obj);
 
-				this.onSOUpdated_handler(so);
-				break;
-		}
+		this.onSOUpdated_handler(so);
 	}
 
 	onSOUpdated_handler = (so: SceneObject) => {

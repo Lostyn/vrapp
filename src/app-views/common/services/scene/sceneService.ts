@@ -3,6 +3,7 @@ import { SceneObject } from '../../../../types/scene';
 import { createUUID } from '../../core/id';
 import Signal from '../../core/signal';
 import SocketClientService from '../socketClient/socketClientService';
+import sample from './sample';
 
 const kc_sceneServiceChannel: string = 'scene:rpc';
 class SceneService {
@@ -20,7 +21,9 @@ class SceneService {
 	public get onSelect() { return this._onSelect; }
 
 	constructor(socket: SocketClientService) {
-		this.content = [];
+		// this.content = [];
+		this.content = sample;
+
 
 		socket.ws.on(kc_sceneServiceChannel, (...args) => {
 			const params = args[0];

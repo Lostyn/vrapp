@@ -21,7 +21,7 @@ const SceneObjects = (props: IProps) => {
 		sceneService.selectObject(instanceId);
 	}
 
-	const [ items, setItems ] = useState<SceneObject[]>([]);
+	const [ items, setItems ] = useState<SceneObject[]>(sceneService.content);
 	const [ tic, setTic ] = useState<boolean>();
 
 	useEffect( () => {
