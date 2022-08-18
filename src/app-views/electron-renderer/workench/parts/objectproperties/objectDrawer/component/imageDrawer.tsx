@@ -48,7 +48,7 @@ const ImageDrawer = (props: IProps) => {
 			<ComponentHeader open={open} setOpen={setOpen}>Image</ComponentHeader>
 			{ open && (
 				<>
-					<ColorDrawer label='color' onChange={onColorChange} property={image.color} />
+					<ColorDrawer label='Color' onChange={onColorChange} property={image.color} />
 					<NumberDrawer label='Width' onChange={onWidthChange} property={image.width}/>
 					<NumberDrawer label='Height' onChange={onHeightChange} property={image.height} />
 					<NumberDrawer label='Border width' onChange={onBorderChange} property={image.borderWidth} />
