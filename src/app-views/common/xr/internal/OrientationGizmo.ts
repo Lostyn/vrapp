@@ -77,11 +77,10 @@ class OrientationGizmo {
 		for (let i = 0; i < this.axes.length; i++) {
 			const axis = this.axes[i];
 			this.drawLine(this.center, axis.position, axis.line, axis.color);
-			// this.drawCircle(axis.position, axis.size, axis.color);
-
+			this.drawCircle(axis.position, axis.size, axis.color);
 
 			this.ctx.font = 'bold 8px arial';
-			this.ctx.fillStyle = axis.color;
+			this.ctx.fillStyle = 'white';
 			this.ctx.textBaseline = 'middle';
 			this.ctx.textAlign = 'center';
 			this.ctx.fillText(axis.label, axis.position.x, axis.position.y);
