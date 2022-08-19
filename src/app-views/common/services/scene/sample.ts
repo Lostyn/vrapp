@@ -15,8 +15,8 @@ const sample = (): SceneObject[] => {
 			parent: '',
 			name: '1',
 			transform: {
-				position: new Vector3(-1.3, 0, 0),
-				rotation: new Vector3(),
+				position: new Vector3(0, 0, 0),
+				rotation: new Vector3(90, 0, 0),
 				scale: new Vector3(1, 1, 1)
 			},
 			image: {
@@ -32,58 +32,7 @@ const sample = (): SceneObject[] => {
 			parent: id1,
 			name: '1-1',
 			transform: {
-				position: new Vector3(),
-				rotation: new Vector3(),
-				scale: new Vector3(1, 1, 1)
-			},
-			image: {
-				width: 1,
-				height: 1,
-				radius: new Vector4(),
-				borderWidth: 0,
-				color: '#ffffff'
-			}
-		},
-		{
-			instanceID: id5,
-			parent: id1,
-			name: '1-2',
-			transform: {
-				position: new Vector3(),
-				rotation: new Vector3(),
-				scale: new Vector3(1, 1, 1)
-			},
-			image: {
-				width: 1,
-				height: 1,
-				radius: new Vector4(),
-				borderWidth: 0,
-				color: '#ffffff'
-			}
-		},
-		{
-			instanceID: id4,
-			parent: id2,
-			name: '1-1-1',
-			transform: {
-				position: new Vector3(),
-				rotation: new Vector3(),
-				scale: new Vector3(1, 1, 1)
-			},
-			image: {
-				width: 1,
-				height: 1,
-				radius: new Vector4(),
-				borderWidth: 0,
-				color: '#ffffff'
-			}
-		},
-		{
-			instanceID: id3,
-			parent: '',
-			name: '2',
-			transform: {
-				position: new Vector3(1.3, 0, 0),
+				position: new Vector3(0, 1, 0),
 				rotation: new Vector3(),
 				scale: new Vector3(1, 1, 1)
 			},

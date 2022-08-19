@@ -1,6 +1,7 @@
-import { Vector3 } from 'three';
+import { Quaternion, Vector3 } from 'three';
 import { SceneObject } from '../../../../types/scene';
 import SceneService from '../../services/scene/sceneService';
+import { RotateAroundPivot } from '../../utils/math3d';
 import Quad from '../sceneObject/quad';
 import BaseScene from './baseScene';
 
@@ -55,7 +56,9 @@ class Viewport extends BaseScene {
 		if (obj == undefined) return;
 
 		obj.position.copy(this.getPosition(so));//.set(so.transform.position.x, so.transform.position.y, so.transform.position.z);
-		obj.rotation.set(so.transform.rotation.x * Math.PI / 180, so.transform.rotation.y * Math.PI / 180, so.transform.rotation.z * Math.PI / 180);
+
+		var rot = this.getRotation(so);
+		obj.rotation.set(rot.x, rot.y, rot.z);
 		obj.scale.set(so.transform.scale.x, so.transform.scale.y, so.transform.scale.z);
 
 		var childs = this._sceneService.content.filter(o => o.parent == so.instanceID);
@@ -67,10 +70,29 @@ class Viewport extends BaseScene {
 	getPosition(so: SceneObject) {
 		var pos: Vector3 = new Vector3().copy(so.transform.position);
 		if (so.parent != '') {
-			pos.add(this.getPosition(this.findSceneObject(so.parent)))
+			var parent = this.findSceneObject(so.parent);
+			var parentPos = this.getPosition(parent);
+
+			var parentRot = this.getRotation(parent);
+			pos = RotateAroundPivot(pos, parentRot);
+			pos.add(parentPos);
 		}
 
 		return pos;
+	}
+
+	getRotation(so: SceneObject) {
+		var rot: Vector3 = new Vector3().set(
+			so.transform.rotation.x * Math.PI / 180,
+			so.transform.rotation.y * Math.PI / 180,
+			so.transform.rotation.z * Math.PI / 180
+		);
+
+		if (so.parent != '') {
+			rot.add(this.getRotation(this.findSceneObject(so.parent)))
+		}
+
+		return rot;
 	}
 
 	findSceneObject(instanceID: string): SceneObject {
