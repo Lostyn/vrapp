@@ -2,6 +2,7 @@ import { Color, Vector3, Vector4 } from 'three';
 
 export type SceneObject = {
 	instanceID: string,
+	parent: string,
 	name: string,
 	transform: Transform;
 	image: Image;

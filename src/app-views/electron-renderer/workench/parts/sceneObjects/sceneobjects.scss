@@ -21,6 +21,7 @@
 
 		&.selected {
 			border-left: 2px solid var(--accent-color-primary);
+			background-color: var(--over-background-color);
 		}
 	}
 }

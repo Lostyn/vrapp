@@ -22,7 +22,7 @@ class SceneService {
 
 	constructor(socket: SocketClientService) {
 		// this.content = [];
-		this.content = sample;
+		this.content = sample();
 
 
 		socket.ws.on(kc_sceneServiceChannel, (...args) => {
@@ -56,6 +56,7 @@ class SceneService {
 	rpc_createObject(objStr: string, instanceID: string) {
 		var so: SceneObject = {
 			instanceID: instanceID,
+			parent: '',
 			name: objStr,
 			transform: {
 				position: new Vector3(),

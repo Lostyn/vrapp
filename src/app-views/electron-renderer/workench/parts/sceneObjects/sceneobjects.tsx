@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { SceneObject } from '../../../../../types/scene';
 import { createUUID } from '../../../../common/core/id';
 import { PropsWithService, withServices } from '../../../services/serviceContext';
+import Tree from '../../components/tree/tree';
+import { TreeData } from '../../components/tree/treeUtils';
 import PartHeader from '../../ui/partHeader/partHeader';
 import SceneObjectLine from './sceneobjectsline';
 
@@ -37,17 +39,24 @@ const SceneObjects = (props: IProps) => {
 		return () => unregister.forEach( u => u() );
 	})
 
+	const Row = (d: SceneObject, ident: number) => {
+		return (
+			<SceneObjectLine
+				key={d.instanceID}
+				selected={d.instanceID == selected}
+				onClick={ () => selectItem(d.instanceID)}
+				ident={ident}
+				{ ...d }
+			/>
+		)
+	}
+
 	return (
 		<div id="scene-objects">
 			<PartHeader><i className='icon-list'/>Scene Objects</PartHeader>
-			{ items.map( so =>
-					<SceneObjectLine
-						key={so.instanceID}
-						selected={so.instanceID == selected}
-						onClick={ () => selectItem(so.instanceID) }
-						{...so}
-					/>
-			)}
+			<Tree datas={items}>
+				{ Row }
+			</Tree>
 			<button onClick={createTest}>Create</button>
 		</div>
 	)

@@ -4,6 +4,7 @@ import cs from 'classnames';
 
 type IProps = SceneObject & {
 	selected: boolean,
+	ident?: number,
 	onClick: () => void
 }
 
@@ -13,7 +14,11 @@ const SceneObjectLine = (props: IProps) => {
 	})
 
 	return (
-		<a className={classNames} onClick={props.onClick}>{props.name}</a>
+		<a className={classNames} onClick={props.onClick} style={{
+			paddingLeft: `${(props.ident + 1) * 14}px`
+		}}>
+			{props.name}
+		</a>
 	)
 }
 
