@@ -8,7 +8,7 @@ type IProps = {
 
 const Tree = (props: IProps) => {
 	var treeData = prepareData(props.datas);
-	console.log(treeData);
+	// console.log(treeData);
 
 
 	const renderRow = (data: any, i: number, ident: number) => {
