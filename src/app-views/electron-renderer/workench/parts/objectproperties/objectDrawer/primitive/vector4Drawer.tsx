@@ -25,7 +25,7 @@ const Vector4Drawer = (props: IProps) => {
 	const onChangeW = (value) => onChange('w', value);
 
 	return (
-		<div className='ui-group'>
+		<div className='ui-group ui-vector4-group'>
 			<span className='ui-label'>{props.label}</span>
 			<div className='ui-input ui-vector-input'>
 				<NumericInput

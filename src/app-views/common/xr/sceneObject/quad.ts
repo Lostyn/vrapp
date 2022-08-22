@@ -1,4 +1,4 @@
-import { BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Mesh, MeshBasicMaterial, Shader, ShaderMaterial, Vector2, Vector3, Vector4 } from 'three';
+import { BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Mesh, MeshBasicMaterial, Shader, ShaderMaterial, SrcColorFactor, Vector2, Vector3, Vector4 } from 'three';
 
 class Vertice {
 	pos: Vector3;
@@ -42,37 +42,21 @@ class Quad extends Mesh<BufferGeometry, ShaderMaterial> {
 
 	set Width(value: number) {
 		this.width = Math.max(value, 0);
-		// this.updateVertex();
 	}
 
 	set Height(value: number) {
-		this.height = Math.max(value, 0);;
-		// this.updateVertex();
+		this.height = Math.max(value, 0);
 	}
 
 	set BorderWidth(value: number) {
 		this.borderWidth = Math.max(value, 0);
-		// this.updateVertex();
 	}
 
-	set CornerTL(value: number) {
-		this.radius.x = value;
-		// this.updateVertex();
-	}
-
-	set CornerTR(value: number) {
-		this.radius.y = value;
-		// this.updateVertex();
-	}
-
-	set CornerBR(value: number) {
-		this.radius.z = value;
-		// this.updateVertex();
-	}
-
-	set CornerBL(value: number) {
-		this.radius.w = value;
-		// this.updateVertex();
+	set Radius(value: Vector4) {
+		this.radius.y = value.x;
+		this.radius.x = value.y;
+		this.radius.z = value.z;
+		this.radius.w = value.w;
 	}
 
 	set Color(value: string) {

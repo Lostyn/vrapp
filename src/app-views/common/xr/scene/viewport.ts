@@ -44,10 +44,7 @@ class Viewport extends BaseScene {
 		obj.Width = so.image.width;
 		obj.Height = so.image.height;
 		obj.BorderWidth = so.image.borderWidth;
-		obj.CornerTL = so.image.radius.x;
-		obj.CornerTR = so.image.radius.y;
-		obj.CornerBR = so.image.radius.z;
-		obj.CornerBL = so.image.radius.w;
+		obj.Radius = so.image.radius;
 		obj.rebuild();
 	}
 

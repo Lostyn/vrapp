@@ -51,8 +51,8 @@ const ImageDrawer = (props: IProps) => {
 					<ColorDrawer label='Color' onChange={onColorChange} property={image.color} />
 					<NumberDrawer label='Width' onChange={onWidthChange} property={image.width}/>
 					<NumberDrawer label='Height' onChange={onHeightChange} property={image.height} />
-					<NumberDrawer label='Border width' onChange={onBorderChange} property={image.borderWidth} />
 					<Vector4Drawer label='Radius' onChange={onRadiusChange} property={image.radius} />
+					<NumberDrawer label='Border width' onChange={onBorderChange} property={image.borderWidth} />
 				</>
 			)}
 		</>

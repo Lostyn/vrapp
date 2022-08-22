@@ -7,6 +7,25 @@
     flex-wrap: nowrap;
 	position: relative;
 
+	&.ui-vector4-group {
+		min-height: 40px;
+		align-items: flex-start;
+
+		& > .ui-label {
+			margin-top: 5px;
+		}
+
+		& > .ui-input {
+			height: 52px;
+			flex-wrap: wrap;
+
+			& > .ui-element {
+				flex: none;
+				width: calc(50% - 6px);
+			}
+		}
+	}
+
 	& .ui-label {
 		font-size: 12px;
     	width: 30%;
