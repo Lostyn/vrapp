@@ -52,11 +52,10 @@ class Viewport extends BaseScene {
 		const obj = this._content.get(so.instanceID);
 		if (obj == undefined) return;
 
-		obj.position.copy(this.getPosition(so));//.set(so.transform.position.x, so.transform.position.y, so.transform.position.z);
+		obj.position.copy(this.getPosition(so));
 
 		var rot = this.getRotation(so);
 		obj.rotation.set(rot.x, rot.y, rot.z);
-		obj.scale.set(so.transform.scale.x, so.transform.scale.y, so.transform.scale.z);
 
 		var childs = this._sceneService.content.filter(o => o.parent == so.instanceID);
 		for (var c of childs) {

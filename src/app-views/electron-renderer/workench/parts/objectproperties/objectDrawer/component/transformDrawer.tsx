@@ -29,10 +29,6 @@ const TransformDrawer = (props: IProps) => {
 		props.onChange(instanceID, getPath('rotation', rot));
 	}
 
-	const onChangeScale = (scale:Vector3) => {
-		props.onChange(instanceID, getPath('scale', scale));
-	}
-
 	return (
 		<>
 			<ComponentHeader open={open} setOpen={setOpen}>Transform</ComponentHeader>
@@ -40,7 +36,6 @@ const TransformDrawer = (props: IProps) => {
 				<>
 					<Vector3Drawer label="Position" onChange={onChangePosition} property={transform.position} />
 					<Vector3Drawer label="Rotation" onChange={onChangeRotation} property={transform.rotation} />
-					<Vector3Drawer label="Scale" onChange={onChangeScale} property={transform.scale} />
 				</>
 			)}
 		</>

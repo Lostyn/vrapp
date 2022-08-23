@@ -60,8 +60,7 @@ class SceneService {
 			name: objStr,
 			transform: {
 				position: new Vector3(),
-				rotation: new Vector3(),
-				scale: new Vector3(1, 1, 1)
+				rotation: new Vector3()
 			},
 			image: {
 				width: 1,
