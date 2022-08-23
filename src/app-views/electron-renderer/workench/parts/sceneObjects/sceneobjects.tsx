@@ -34,7 +34,8 @@ const SceneObjects = (props: IProps) => {
 		const unregister = [
 			sceneService.onSOAdded.register(onAdd),
 			sceneService.onSelect.register(onSelect),
-			sceneService.onSOUpdated.register(onUpdate)
+			sceneService.onSOUpdated.register(onUpdate),
+			sceneService.onHierarchyChanged.register(onUpdate)
 		];
 		return () => unregister.forEach( u => u() );
 	})
@@ -51,10 +52,16 @@ const SceneObjects = (props: IProps) => {
 		)
 	}
 
+	const onTreeChange = (itemID, parentID) => {
+		sceneService.rpc_setParent(itemID, parentID);
+	}
+
 	return (
 		<div id="scene-objects">
 			<PartHeader><i className='icon-list'/>Scene Objects</PartHeader>
-			<Tree datas={items}>
+			<Tree
+				datas={items}
+				onChange={onTreeChange}>
 				{ Row }
 			</Tree>
 			<button onClick={createTest}>Create</button>

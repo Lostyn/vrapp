@@ -20,6 +20,9 @@ class SceneService {
 	private _onSelect: Signal = new Signal();
 	public get onSelect() { return this._onSelect; }
 
+	private _onHierarchyChanged: Signal = new Signal();
+	public get onHierarchyChanged() { return this._onHierarchyChanged; }
+
 	constructor(socket: SocketClientService) {
 		// this.content = [];
 		this.content = sample();
@@ -82,6 +85,13 @@ class SceneService {
 			Object.assign(obj, patch);
 			this._onSOUpdated.fire(obj);
 		}
+	}
+
+	rpc_setParent(instanceID: string, parentID: string) {
+		const obj = this.content.find(o => o.instanceID == instanceID);
+		obj.parent = parentID;
+		this._onHierarchyChanged.fire();
+
 	}
 
 	selectObject(instanceId: string) {

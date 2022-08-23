@@ -13,6 +13,8 @@ const SceneObjectLine = (props: IProps) => {
 		selected: props.selected
 	})
 
+	// console.log(props);
+
 	return (
 		<a className={classNames} onClick={props.onClick} style={{
 			paddingLeft: `${(props.ident + 1) * 14}px`
