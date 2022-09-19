@@ -17,6 +17,7 @@ class Viewport extends BaseScene {
 
 		sceneService.onSOAdded.register(this.onSOAdded_handle);
 		sceneService.onSOUpdated.register(this.onSOUpdated_handler);
+		sceneService.onHierarchyChanged.register(this.onHierarchyChanged_handler);
 
 		this.populate(sceneService.content);
 	}
@@ -46,6 +47,12 @@ class Viewport extends BaseScene {
 		obj.BorderWidth = so.image.borderWidth;
 		obj.Radius = so.image.radius;
 		obj.rebuild();
+	}
+
+	onHierarchyChanged_handler = () => {
+		for (let i = 0; i < this._sceneService.content.length; i++) {
+			this.updateTransform(this._sceneService.content[i]);
+		}
 	}
 
 	updateTransform = (so: SceneObject) => {
