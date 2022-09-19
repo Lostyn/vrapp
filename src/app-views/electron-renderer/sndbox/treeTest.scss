@@ -1,0 +1,16 @@
+.tree {
+	border: 1px solid red;
+	width: fit-content;
+
+	& .tree-row {
+		border: 1px solid green;
+
+		display: flex;
+
+		& a {
+			border: 1px solid blue;
+
+			flex: 1;
+		}
+	}
+}

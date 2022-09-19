@@ -1,3 +1,4 @@
+import cs from 'classnames';
 import React, { memo, ReactNode, useRef, useState } from 'react';
 import { prepareData, TreeData, TreeSourceData } from './treeUtils';
 
@@ -11,51 +12,72 @@ const Tree = (props: IProps) => {
 	var treeData = prepareData(props.datas);
 
 
-	const [dragItem, setDragItem] = useState<TreeSourceData>();
-	const [overItem, setOverItem] = useState<TreeSourceData>();
+	// const [dragItem, setDragItem] = useState<TreeSourceData>();
 
-	const dragStart = (e, instanceID) => {
-		var item = props.datas.find( o => o.instanceID == instanceID);
-		setDragItem(item);
+	const [overItem, setOverItem] = useState<string>();
+	const [currentDrag, setCurrentDrag] = useState<string>();
+	const [dropPos, setDropPos] = useState<string>();
+
+	const onDragStart = (e, instanceID) => {
+		setCurrentDrag(instanceID);
 	}
 
-	const dragEnter = (e, instanceID) => {
-		if (instanceID != dragItem.instanceID) {
-			var itemO = props.datas.find( o => o.instanceID == instanceID);
-			if (itemO.parent != dragItem.instanceID) {
-				setOverItem(itemO);
-			}
+	const onDragOver = (e, instanceID) => {
+		if (currentDrag === instanceID) {
+			setDropPos(undefined);
+			return;
+		}
+
+		let el = e.target;
+		while(!el.classList.contains('tree-row') && el.parentNode != undefined) {
+			el = el.parentNode;
+		}
+
+		if (el != undefined) {
+			setOverItem(instanceID);
+
+			var y = e.pageY - el.getBoundingClientRect().y;
+			if (y < 5) setDropPos('top');
+			else if (el.getBoundingClientRect().height - y < 5) setDropPos('bottom');
+			else setDropPos(undefined);
 		}
 	}
 
-	const dragExit = (e, instanceID) => {
-		if (overItem && instanceID == overItem.instanceID) {
-			setOverItem(null);
+	const onDragLeave = (e, instanceID) => {
+		let el = e.target;
+		while(!el.classList.contains('tree-row') && el.parentNode != undefined) {
+			el = el.parentNode;
+		}
+
+		if (overItem === el) {
+			setOverItem(undefined);
 		}
 	}
 
-	const dragOver = (e, instanceID) => {
-		e.preventDefault();
+	const onDrop = (e, instanceID) => {
+		setCurrentDrag("");
+		if (currentDrag === instanceID || currentDrag === undefined) return;
+
 	}
 
-	const dragEnd = (e) => {
-		var parentID = overItem != null ? overItem.instanceID : '';
-		if (dragItem.parent != parentID)
-			props.onChange(dragItem.instanceID, parentID);
-	}
 
 
 	const renderRow = (data: any, i: number, ident: number) => {
 		var childrens = [];
 
 		var node = props.children(data, ident);
+		var cx = cs('tree-row', {
+			drag: data.instanceID === currentDrag,
+			"drop-top": data.instanceID === overItem && dropPos === 'top',
+			"drop-bottom": data.instanceID === overItem && dropPos === 'bottom',
+		})
+
 		childrens.push(
-			<div className='tree-row' key={`drag_${data.instanceID}`}
-				onDragStart={ e => dragStart(e, data.instanceID)}
-				onDragEnter={ e => dragEnter(e, data.instanceID)}
-				onDragOver={ e => dragOver(e, data.instanceID)}
-				onDragLeave={e => dragExit(e, data.instanceID)}
-				onDragEnd={ dragEnd }
+			<div className={cx} key={`drag_${data.instanceID}`}
+				onDrag={ e => onDragStart(e, data.instanceID) }
+				onDragOver={ e => onDragOver(e, data.instanceID) }
+				onDragLeave={ e => onDragLeave(e, data.instanceID)}
+				onDragEnd={e => onDrop(e, data.instanceID) }
 				draggable
 			>
 				{ node }
@@ -66,6 +88,7 @@ const Tree = (props: IProps) => {
 		return childrens;
 	}
 
+	console.log(dropPos);
 	return (
 		<div className='tree'>
 			{ treeData && treeData.map( (d, i) => renderRow(d, i, 0) )}

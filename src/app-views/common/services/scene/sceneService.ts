@@ -24,8 +24,8 @@ class SceneService {
 	public get onHierarchyChanged() { return this._onHierarchyChanged; }
 
 	constructor(socket: SocketClientService) {
-		// this.content = [];
-		this.content = sample();
+		this.content = [];
+		// this.content = sample();
 
 
 		socket.ws.on(kc_sceneServiceChannel, (...args) => {
