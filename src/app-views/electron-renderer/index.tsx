@@ -30,13 +30,13 @@ class DesktopWorkbench {
 	buildUi() {
 		const root = createRoot(this.workbenchContainer);
 		root.render(
-			<TreeTest/>
-			// <ServiceProvider services={{
-			// 	sceneService: this.sceneService
-			// }}>
-			// 	<Viewport />
-			// 	<DesktopUI />
-			// </ServiceProvider>
+			// <TreeTest/>
+			<ServiceProvider services={{
+				sceneService: this.sceneService
+			}}>
+				<Viewport />
+				<DesktopUI />
+			</ServiceProvider>
 		);
 	}
 }

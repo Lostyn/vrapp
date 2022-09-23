@@ -1,14 +1,35 @@
 import React, { useEffect, useState } from "react";
+import { ControlledTreeEnvironment, DraggingPosition, InteractionMode, Tree, TreeItem, TreeItemIndex } from 'react-complex-tree';
 import { SceneObject } from '../../../../../types/scene';
 import { createUUID } from '../../../../common/core/id';
 import { PropsWithService, withServices } from '../../../services/serviceContext';
-import Tree from '../../components/tree/tree';
-import { TreeData } from '../../components/tree/treeUtils';
 import PartHeader from '../../ui/partHeader/partHeader';
 import SceneObjectLine from './sceneobjectsline';
 
 type IProps = PropsWithService & {
 
+}
+
+const prepare = (datas): Record<TreeItemIndex, TreeItem> => {
+	const result: Record<TreeItemIndex, TreeItem> = {
+		root: {
+			index: 'root',
+			hasChildren: true,
+			data: 'root',
+			children: datas.filter(d => d.parent === "").map( o => o.instanceID)
+		}
+	}
+
+	for(const item of datas) {
+		const children = datas.filter( d => d.parent == item.instanceID).map( o => o.instanceID);
+		result[item.instanceID] = {
+			index: item.instanceID,
+			hasChildren: children.length > 0,
+			children,
+			data: item.name
+		}
+	}
+	return result;
 }
 
 const SceneObjects = (props: IProps) => {
@@ -40,30 +61,65 @@ const SceneObjects = (props: IProps) => {
 		return () => unregister.forEach( u => u() );
 	})
 
-	const Row = (d: SceneObject, ident: number) => {
-		return (
-			<SceneObjectLine
-				key={d.instanceID}
-				selected={d.instanceID == selected}
-				onClick={ () => selectItem(d.instanceID)}
-				ident={ident}
-				{ ...d }
-			/>
-		)
-	}
-
 	const onTreeChange = (itemID, parentID) => {
 		sceneService.rpc_setParent(itemID, parentID);
+	}
+
+	const [ expandedItems, setExpandedItems ] = useState([]);
+
+
+	const InteractionProps = {
+		defaultInteractionMode: InteractionMode.ClickArrowToExpand,
+		canDragAndDrop: true,
+		canReorderItems: true,
+		canDropOnItemWithChildren: true,
+		canDropOnItemWithoutChildren: true,
+		showLiveDescription: false
+	}
+
+	const OnDrop = (items: TreeItem[], target: DraggingPosition) => {
+
+
+		for(const item of items) {
+			if (target.targetType === 'item') {
+				if(target.targetItem === item.index) {
+					// NOOP
+				} else {
+					onTreeChange(item.index, target.targetItem);
+				}
+			} else {
+				if (target.parentItem === 'root') {
+					onTreeChange(item.index, '');
+				} else {
+					onTreeChange(item.index, target.parentItem);
+				}
+			}
+		}
 	}
 
 	return (
 		<div id="scene-objects">
 			<PartHeader><i className='icon-list'/>Scene Objects</PartHeader>
-			<Tree
-				datas={items}
-				onChange={onTreeChange}>
-				{ Row }
-			</Tree>
+
+			<ControlledTreeEnvironment
+				{ ...InteractionProps }
+
+				items={prepare(items)}
+				getItemTitle={item => item.data}
+				viewState={{
+					['tree-1']: {
+						expandedItems,
+						selectedItems: [selected]
+					}
+				}}
+
+				onExpandItem={ item => setExpandedItems([...expandedItems, item.index])}
+				onCollapseItem={ item => setExpandedItems(expandedItems.filter(eii => eii !== item.index))}
+				onSelectItems={items => selectItem(items[0] as string)}
+				onDrop={OnDrop}
+			>
+				<Tree treeId="tree-1" rootItem="root" treeLabel="Tree Example" />
+			</ControlledTreeEnvironment>
 			<button onClick={createTest}>Create</button>
 		</div>
 	)

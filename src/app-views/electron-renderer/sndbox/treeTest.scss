@@ -1,16 +1,147 @@
-.tree {
-	border: 1px solid red;
-	width: fit-content;
+:root {
+	--rct-color-tree-bg: #f6f8fa;
+	--rct-color-tree-focus-outline: #0366d6;
 
-	& .tree-row {
-		border: 1px solid green;
+	--rct-color-focustree-item-selected-bg: #e8eaed;
+	--rct-color-focustree-item-selected-text: inherit;
+	--rct-color-focustree-item-focused-border: #0366d6;
+	--rct-color-focustree-item-draggingover-bg: #ebf0f4;
+	--rct-color-focustree-item-draggingover-color: inherit;
 
-		display: flex;
+	--rct-color-nonfocustree-item-selected-bg: #e8eaed;
+	--rct-color-nonfocustree-item-selected-text: inherit;
+	--rct-color-nonfocustree-item-focused-border: #dbdbdb;
 
-		& a {
-			border: 1px solid blue;
+	--rct-color-search-highlight-bg: #a2aed2;
+	--rct-color-drag-between-line-bg: #0366d6;
+	--rct-color-arrow: #9aa5b3;
 
-			flex: 1;
-		}
-	}
-}
+	--rct-item-height: 22px;
+
+	--rct-color-renaming-input-submitbutton-bg: inherit;
+	--rct-color-renaming-input-submitbutton-bg-hover: #0366d6;
+	--rct-color-renaming-input-submitbutton-bg-active: #095fc1;
+
+	--rct-color-renaming-input-submitbutton-text: inherit;
+	--rct-color-renaming-input-submitbutton-text-hover: #ffffff;
+	--rct-color-renaming-input-submitbutton-text-active: #ffffff;
+  }
+
+  .rct-tree-root {
+	font-family: sans-serif;
+  }
+
+  .rct-tree-root-focus {
+  }
+
+  .rct-tree-item-li {
+	font-size: 0.8rem;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+  }
+
+  .rct-tree-item-title-container {
+	display: flex;
+	align-items: center;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	color: white;
+  }
+
+  .rct-tree-child-list {
+  }
+  .rct-tree-item-button {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	background-color: transparent;
+	font-family: inherit;
+	font-size: inherit;
+	border: none;
+	width: 100%;
+	height: var(--rct-item-height);
+	text-align: left;
+	color: inherit;
+	outline: none;
+  }
+
+  .rct-tree-item-arrow {
+	width: 16px;
+  }
+
+  .rct-tree-item-arrow svg {
+	width: 16px;
+  }
+
+  .rct-tree-item-arrow-path {
+	fill: var(--accent-color-primary);
+  }
+
+  .rct-tree-items-container {
+	margin: 0;
+	padding: 0;
+  }
+
+  .rct-tree-root:not(.rct-tree-root-focus) .rct-tree-item-title-container-selected {
+	background-color: var(--over-background-color);
+	border-left: 2px solid var(--accent-color-primary);
+  }
+  .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-selected {
+	background-color: var(--over-background-color);
+	border-left: 2px solid var(--accent-color-primary);
+  }
+  .rct-tree-root.rct-tree-root-focus .rct-tree-item-title-container-focused {
+	outline: none;
+  }
+
+
+  .rct-tree-item-title-container-dragging-over {
+	background-color: var(--over-background-color);
+  }
+
+  .rct-tree-drag-between-line {
+	position: absolute;
+	right: 0;
+	top: -2px;
+	height: 4px;
+	background-color: var(--accent-color-primary);
+  }
+
+  .rct-tree-drag-between-line-top {
+	top: 0px;
+  }
+
+  .rct-tree-drag-between-line-bottom {
+	top: -4px;
+  }
+
+
+  /* TODO see renaming form in multiple tree example, wraps around */
+  .rct-tree-item-renaming-form {
+	flex-grow: 1;
+	display: flex;
+  }
+  .rct-tree-item-renaming-input {
+	flex-grow: 1;
+	background-color: inherit;
+	border: none;
+	color: inherit;
+	outline: none;
+  }
+  .rct-tree-item-renaming-submit-button {
+	border: none;
+	background-color: var(--rct-color-renaming-input-submitbutton-bg);
+	border-radius: 999px;
+	color: var(--rct-color-renaming-input-submitbutton-text);
+	cursor: pointer;
+  }
+  .rct-tree-item-renaming-submit-button:hover {
+	background-color: var(--rct-color-renaming-input-submitbutton-bg-hover);
+	color: var(--rct-color-renaming-input-submitbutton-text-hover);
+  }
+  .rct-tree-item-renaming-submit-button:active {
+	background-color: var(--rct-color-renaming-input-submitbutton-bg-active);
+	color: var(--rct-color-renaming-input-submitbutton-text-active);
+  }
