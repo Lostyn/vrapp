@@ -4,7 +4,6 @@ import { $, append } from '../common/core/dom';
 import SceneService from '../common/services/scene/sceneService';
 import SocketClientService from '../common/services/socketClient/socketClientService';
 import ServiceProvider from './services/serviceContext';
-import TreeTest from './sndbox/tree-test';
 import Viewport from './workench/components/viewport/viewport';
 import DesktopUI from './workench/desktopUI';
 
@@ -30,7 +29,6 @@ class DesktopWorkbench {
 	buildUi() {
 		const root = createRoot(this.workbenchContainer);
 		root.render(
-			// <TreeTest/>
 			<ServiceProvider services={{
 				sceneService: this.sceneService
 			}}>

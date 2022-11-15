@@ -126,7 +126,7 @@ class Quad extends Mesh<BufferGeometry, ShaderMaterial> {
 				varying float pixelWorldScale;
 
 
-				const float kSmooth = 0.0125;
+				const float kSmooth = 0.003125;
 
 				float remap(float value, float low1, float high1, float low2, float high2) {
 					return low2 + (value - low1) * (high2 - low2) / (high1 - low1);

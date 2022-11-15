@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Color, Vector2, Vector3, Vector4 } from 'three';
 import { SceneObject } from '../../../../types/scene';
 import { createUUID } from '../../core/id';
@@ -26,7 +27,6 @@ class SceneService {
 	constructor(socket: SocketClientService) {
 		this.content = [];
 		// this.content = sample();
-
 
 		socket.ws.on(kc_sceneServiceChannel, (...args) => {
 			const params = args[0];

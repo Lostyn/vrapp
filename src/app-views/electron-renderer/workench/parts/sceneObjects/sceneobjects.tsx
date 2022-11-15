@@ -4,7 +4,6 @@ import { SceneObject } from '../../../../../types/scene';
 import { createUUID } from '../../../../common/core/id';
 import { PropsWithService, withServices } from '../../../services/serviceContext';
 import PartHeader from '../../ui/partHeader/partHeader';
-import SceneObjectLine from './sceneobjectsline';
 
 type IProps = PropsWithService & {
 
@@ -118,7 +117,7 @@ const SceneObjects = (props: IProps) => {
 				onSelectItems={items => selectItem(items[0] as string)}
 				onDrop={OnDrop}
 			>
-				<Tree treeId="tree-1" rootItem="root" treeLabel="Tree Example" />
+				<Tree treeId="tree-1" rootItem="root"/>
 			</ControlledTreeEnvironment>
 			<button onClick={createTest}>Create</button>
 		</div>

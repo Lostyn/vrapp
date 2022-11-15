@@ -9,9 +9,6 @@ type IProps = {
 
 const DesktopUI = (props: IProps) => {
 
-
-
-
 	return (
 		<>
 			<SceneObjects />
