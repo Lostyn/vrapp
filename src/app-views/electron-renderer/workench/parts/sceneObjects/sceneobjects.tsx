@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { ControlledTreeEnvironment, DraggingPosition, InteractionMode, Tree, TreeItem, TreeItemIndex } from 'react-complex-tree';
 import { SceneObject } from '../../../../../types/scene';
 import { createUUID } from '../../../../common/core/id';
-import { PropsWithService, withServices } from '../../../services/serviceContext';
+import { useServices } from '../../../services/serviceContext';
 import PartHeader from '../../ui/partHeader/partHeader';
 
-type IProps = PropsWithService & {
+type IProps = {
 
 }
 
@@ -32,7 +32,7 @@ const prepare = (datas): Record<TreeItemIndex, TreeItem> => {
 }
 
 const SceneObjects = (props: IProps) => {
-	const { sceneService } = props.services;
+	const { sceneService } = useServices();
 
 	const createTest = () => {
 		sceneService.rpc_createObject('quad', createUUID());
@@ -124,4 +124,4 @@ const SceneObjects = (props: IProps) => {
 	)
 }
 
-export default withServices(SceneObjects);
+export default SceneObjects;

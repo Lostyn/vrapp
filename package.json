@@ -19,6 +19,7 @@
     "@types/react": "^18.0.15",
     "@types/three": "^0.141.0",
     "@types/websocket": "^1.0.5",
+    "babel-plugin-glsl": "^1.0.0",
     "babelify": "^10.0.0",
     "browser-sync": "^2.27.10",
     "browserify": "^17.0.0",
@@ -39,6 +40,8 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "@react-three/drei": "^9.40.0",
+    "@react-three/fiber": "^8.9.1",
     "classnames": "^2.3.1",
     "cors": "^2.8.5",
     "express": "^4.18.1",

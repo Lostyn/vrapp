@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { SceneObject } from '../../../../../types/scene'
-import { PropsWithService, withServices } from '../../../services/serviceContext'
+import { AppServices } from '../../../../../types/viewService'
+import { useServices } from '../../../services/serviceContext'
 import PartHeader from '../../ui/partHeader/partHeader'
 import ImageDrawer from './objectDrawer/component/imageDrawer'
 import TransformDrawer from './objectDrawer/component/transformDrawer'
@@ -12,57 +13,44 @@ type IState = {
 	selected: SceneObject
 }
 
-class ObjectProperties extends React.Component<PropsWithService, IState> {
-	_unregister: {(): void}[];
+const ObjectProperties = () => {
 
-	constructor(props: PropsWithService) {
-		super(props);
+	const { sceneService } = useServices();
 
-		const {sceneService} = props.services;
-		const so = sceneService.content.find( o => o.instanceID == sceneService.selected);
+	const so = sceneService.content.find( o => o.instanceID == sceneService.selected);
+	const [ selected, setSelected ] = useState<SceneObject>(so);
+	const [ selectedName, setSelectedName ] = useState<string>(so && so.name);
 
-		this.state = {
-			selected: so
-		}
+	const onSelect = () => {
+		const newSelection = sceneService.content.find( o => o.instanceID == sceneService.selected);
+		setSelected({...newSelection});
+		setSelectedName(newSelection.name);
 	}
 
-	onSelect = () => {
-		const {sceneService} = this.props.services;
-		const selected = sceneService.content.find( o => o.instanceID == sceneService.selected);
-		this.setState({selected})
-	}
-
-	renderEmpty = () => {
+	const renderEmpty = () => {
 		return <div/>;
 	}
 
-	componentDidMount() {
-		const {sceneService} = this.props.services;
-
-		this._unregister = [
-			sceneService.onSelect.register(this.onSelect),
-			sceneService.onSOUpdated.register(this.onSelect)
+	useEffect( () => {
+		const _unregister = [
+			sceneService.onSelect.register(onSelect),
+			sceneService.onSOUpdated.register(onSelect)
 		];
-	}
 
-	componentWillUnmount(): void {
-		this._unregister.forEach( u => u() );
-	}
+		return () => {
+			_unregister.forEach( u => u() );
+		}
+	}, [])
 
-	onNameChange = (value:string) => {
-		const {sceneService} = this.props.services;
-		const { selected } = this.state;
-
+	const onNameChange = (value:string) => {
 		sceneService.rpc_updateObject(selected.instanceID, { name: value })
 	}
 
-	renderSelected = () => {
-		const { selected } = this.state;
-		const {sceneService} = this.props.services;
+	const renderSelected = () => {
 
 		return (
 			<>
-				<StringDrawer label='Name' property={selected.name} onChange={this.onNameChange}/>
+				<StringDrawer label='Name' property={selectedName} onChange={onNameChange}/>
 				<PropertiesProvider properties={selected}>
 					<TransformDrawer onChange={sceneService.rpc_updateObject} />
 					<ImageDrawer onChange={sceneService.rpc_updateObject} />
@@ -71,16 +59,13 @@ class ObjectProperties extends React.Component<PropsWithService, IState> {
 		);
 	}
 
-  render() {
-	const { selected } = this.state;
-	return (
+  	return (
 		<div id="object-properties">
 			<PartHeader><i className='icon-code'/>Object Properties</PartHeader>
-			{selected == null ? this.renderEmpty() : this.renderSelected()}
+			{selected == null ? renderEmpty() : renderSelected()}
 		</div>
 	)
-  }
 }
 
 
-export default withServices(ObjectProperties);
+export default ObjectProperties;

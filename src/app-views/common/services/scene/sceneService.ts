@@ -44,16 +44,21 @@ class SceneService {
 				if (typeof _target[propKey] != 'function')
 					return _target[propKey];
 
-				return async function (...args: any[]) {
-					if (propKey.toString().startsWith('rpc_')) {
+				if (propKey.toString().startsWith('rpc_')) {
+					return async function (...args: any[]) {
 						socket.ws.emit(kc_sceneServiceChannel, [propKey, ...args]);
-					} else {
-						_target[propKey](...args);
 					}
-
+				} else {
+					return function (...args: any[]) {
+						return _target[propKey](...args);
+					}
 				}
 			}
 		});
+	}
+
+	getSceneObject(instanceID: string): SceneObject {
+		return this.content.find(o => o.instanceID === instanceID);
 	}
 
 	rpc_createObject(objStr: string, instanceID: string) {

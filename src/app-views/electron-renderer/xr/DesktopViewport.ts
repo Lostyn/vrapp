@@ -1,5 +1,4 @@
 import { Vector3 } from 'three';
-import BaseScene from '../../common/xr/scene/baseScene';
 import { OrbitControls } from '../../common/xr/controls/orbitControls';
 import Viewport from '../../common/xr/scene/viewport';
 import SceneService from '../../common/services/scene/sceneService';
