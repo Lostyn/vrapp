@@ -1,4 +1,3 @@
-import { setMaxListeners } from 'gulp';
 import { Camera, Color, Matrix4, Vector3 } from 'three';
 import { $, append } from '../../core/dom';
 import { OrbitControls } from '../controls/orbitControls';
