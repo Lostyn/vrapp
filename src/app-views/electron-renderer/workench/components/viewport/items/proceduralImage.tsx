@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Vector2, Vector3 } from 'three';
-import { SceneObject } from '../../../../../../types/scene';
+import { ProceduralImageObject, SceneObject } from '../../../../../../types/scene';
 
 const encodeNumber_0_1_16_16 = (a: number, b: number): number => {
 	let kDecodeDot: Vector2 = new Vector2(1, 1 / 65535);
@@ -11,11 +11,11 @@ const encodeNumber_0_1_16_16 = (a: number, b: number): number => {
 }
 
 type IProps = {
-	item:SceneObject,
+	item:ProceduralImageObject,
 	children: any
 }
 
-const Quad = (props:IProps) => {
+const ProceduralImage = (props:IProps) => {
 	const {transform, image} = props.item;
 	const getArray: (p:Vector3) => [x:number, y:number, z:number] = (p: Vector3) => {return [ p.x, p.y, p.z ]};
 
@@ -89,4 +89,4 @@ const Quad = (props:IProps) => {
 	)
 }
 
-export default Quad;
+export default ProceduralImage;

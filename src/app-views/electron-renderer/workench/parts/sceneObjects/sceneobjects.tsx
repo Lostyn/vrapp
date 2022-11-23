@@ -3,6 +3,7 @@ import { ControlledTreeEnvironment, DraggingPosition, InteractionMode, Tree, Tre
 import { SceneObject } from '../../../../../types/scene';
 import { createUUID } from '../../../../common/core/id';
 import { useServices } from '../../../services/serviceContext';
+import CreateOptions from '../../ui/createMenu/createOptions';
 import PartHeader from '../../ui/partHeader/partHeader';
 
 type IProps = {
@@ -33,10 +34,6 @@ const prepare = (datas): Record<TreeItemIndex, TreeItem> => {
 
 const SceneObjects = (props: IProps) => {
 	const { sceneService } = useServices();
-
-	const createTest = () => {
-		sceneService.rpc_createObject('quad', createUUID());
-	};
 
 	const [selected, setSelected] = useState<string>("");
 	const selectItem = (instanceId: string) => {
@@ -119,7 +116,7 @@ const SceneObjects = (props: IProps) => {
 			>
 				<Tree treeId="tree-1" rootItem="root"/>
 			</ControlledTreeEnvironment>
-			<button onClick={createTest}>Create</button>
+			<CreateOptions />
 		</div>
 	)
 }

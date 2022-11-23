@@ -1,18 +1,27 @@
-import { Color, Vector3, Vector4 } from 'three';
+import { Vector3, Vector4 } from 'three';
 
 export type SceneObject = {
 	instanceID: string,
 	parent: string,
 	name: string,
 	transform: Transform;
-	image: Image;
+}
+
+export type AllSceneObject = SceneObject | ProceduralImageObject | TextObject;
+
+export type ProceduralImageObject = SceneObject & {
+	image: ProceduralImage;
+}
+
+export type TextObject = SceneObject & {
+	text: Text
 }
 
 export type Transform = {
 	position: Vector3;
 	rotation: Vector3;
 }
-export type Image = {
+export type ProceduralImage = {
 	width: number;
 	height: number;
 	radius: Vector4;

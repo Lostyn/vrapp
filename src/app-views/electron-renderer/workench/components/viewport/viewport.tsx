@@ -4,10 +4,11 @@ import React, { useEffect, useState } from "react";
 import { SceneObject } from '../../../../../types/scene';
 import { useServices } from '../../../services/serviceContext';
 import Grid from './items/grid';
-import Quad from './items/quad';
+import ProceduralImage from './items/proceduralImage';
 
 import "../../../shaders/gridMaterial"
 import "../../../shaders/proceduralImageMaterial"
+import { Get3DComponentFromType } from '../../../../common/utils/typeUtils';
 
 type IProps = {
 
@@ -37,10 +38,12 @@ const Viewport = (props: IProps) => {
 	const renderItems = (obj: SceneObject[]) => {
 		return obj.map( o => {
 			const childs = items.filter( it => it.parent === o.instanceID)
+
+			const Cpn = Get3DComponentFromType(o);
 			return (
-				<Quad key={o.instanceID} item={o}>
+				<Cpn key={o.instanceID} item={o}>
 					{ childs.length > 0 && renderItems(childs) }
-				</Quad>
+				</Cpn>
 			)
 		});
 	}
