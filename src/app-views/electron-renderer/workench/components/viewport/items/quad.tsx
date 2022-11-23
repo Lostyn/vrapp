@@ -11,7 +11,8 @@ const encodeNumber_0_1_16_16 = (a: number, b: number): number => {
 }
 
 type IProps = {
-	item:SceneObject
+	item:SceneObject,
+	children: any
 }
 
 const Quad = (props:IProps) => {
@@ -82,6 +83,8 @@ const Quad = (props:IProps) => {
 				side={DoubleSide}
 
 			/>
+
+			{props.children}
 		</mesh>
 	)
 }

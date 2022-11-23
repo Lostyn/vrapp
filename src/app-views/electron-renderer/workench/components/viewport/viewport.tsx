@@ -30,7 +30,20 @@ const Viewport = (props: IProps) => {
 		return () => {
 			_unregister.forEach( u => u() );
 		}
-	}, [sceneService])
+	}, [sceneService]);
+
+	const rootItems: SceneObject[] = items.filter( d => d.parent === "");
+
+	const renderItems = (obj: SceneObject[]) => {
+		return obj.map( o => {
+			const childs = items.filter( it => it.parent === o.instanceID)
+			return (
+				<Quad key={o.instanceID} item={o}>
+					{ childs.length > 0 && renderItems(childs) }
+				</Quad>
+			)
+		});
+	}
 
 	return (
 		<div id="viewport">
@@ -43,7 +56,7 @@ const Viewport = (props: IProps) => {
 					<GizmoViewport/>
 				</GizmoHelper>
 				<Grid />
-				{ items.map( item => <Quad key={item.instanceID} item={item} /> )}
+				{ renderItems(rootItems) }
 				<color attach="background" args={["#505050"]}/>
 			</Canvas>
 		</div>
