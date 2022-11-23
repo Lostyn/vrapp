@@ -8,7 +8,7 @@ import ProceduralImage from './items/proceduralImage';
 
 import "../../../shaders/gridMaterial"
 import "../../../shaders/proceduralImageMaterial"
-import { Get3DComponentFromType } from '../../../../common/utils/typeUtils';
+import { Get3DComponentFromType } from '../../../core/registry';
 
 type IProps = {
 

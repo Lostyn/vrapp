@@ -6,14 +6,19 @@ const CreateOptions = (props) => {
 	const { sceneService } = useServices();
 
 	const createProceduralImage = () => {
-		sceneService.rpc_createObject('quad', createUUID());
+		sceneService.rpc_createObject('proceduralImage', createUUID());
+	}
+
+	const createText = () => {
+		sceneService.rpc_createObject('text', createUUID());
 	}
 
 
 
 	return (
 		<div className='create-options'>
-			<button onClick={createProceduralImage}>Procédural Image</button>
+			<button onClick={createProceduralImage}>Procedural Image</button>
+			<button onClick={createText}>Text</button>
 		</div>
 	)
 }

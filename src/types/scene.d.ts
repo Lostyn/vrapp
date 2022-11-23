@@ -7,6 +7,7 @@ export type SceneObject = {
 	transform: Transform;
 }
 
+export type SceneObjectId = 'proceduralImage' | 'text';
 export type AllSceneObject = SceneObject | ProceduralImageObject | TextObject;
 
 export type ProceduralImageObject = SceneObject & {

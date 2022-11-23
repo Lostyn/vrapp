@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { Color, Vector2, Vector3, Vector4 } from 'three';
-import { SceneObject } from '../../../../types/scene';
+import { AllSceneObject, SceneObject, SceneObjectId } from '../../../../types/scene';
 import { createUUID } from '../../core/id';
 import Signal from '../../core/signal';
 import SocketClientService from '../socketClient/socketClientService';
+import { DefaultImageObject, DefaultSceneObject, DefaultTextObject } from './defaultSceneObject';
 import sample from './sample';
 
 const kc_sceneServiceChannel: string = 'scene:rpc';
@@ -61,27 +62,21 @@ class SceneService {
 		return this.content.find(o => o.instanceID === instanceID);
 	}
 
-	rpc_createObject(objStr: string, instanceID: string) {
-		var so: SceneObject = {
-			instanceID: instanceID,
-			parent: '',
-			name: objStr,
-			transform: {
-				position: new Vector3(),
-				rotation: new Vector3()
-			},
-			image: {
-				width: 1,
-				height: 1,
-				radius: new Vector4(0, 0, 0, 0),
-				borderWidth: 0,
-				color: "0xffffff"
-			}
+	rpc_createObject(type: SceneObjectId, instanceID: string) {
+		let so = {};
+
+		switch (type) {
+			case 'proceduralImage':
+				so = Object.assign({}, DefaultSceneObject(instanceID, type), DefaultImageObject)
+				break;
+			case 'text':
+				so = Object.assign({}, DefaultSceneObject(instanceID, type), DefaultTextObject)
+				break;
 		}
 
-		this.content.push(so);
-		this._onSOAdded.fire(so);
-		this.selectObject(so.instanceID);
+		this.content.push(so as SceneObject);
+		this._onSOAdded.fire(so as SceneObject);
+		this.selectObject((so as SceneObject).instanceID);
 	}
 
 	rpc_updateObject(instanceID: string, patch: any) {

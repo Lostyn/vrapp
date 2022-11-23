@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { SceneObject } from '../../../../../types/scene'
-import { AppServices } from '../../../../../types/viewService'
+import { GetObjectPropertiesDrawer } from '../../../core/registry'
 import { useServices } from '../../../services/serviceContext'
 import PartHeader from '../../ui/partHeader/partHeader'
-import ImageDrawer from './objectDrawer/component/imageDrawer'
 import TransformDrawer from './objectDrawer/component/transformDrawer'
 import StringDrawer from './objectDrawer/primitive/stringDrawer'
 import PropertiesProvider from './propertiesContext'
@@ -47,13 +46,13 @@ const ObjectProperties = () => {
 	}
 
 	const renderSelected = () => {
-
+		const Drawer = GetObjectPropertiesDrawer(so);
 		return (
 			<>
 				<StringDrawer label='Name' property={selectedName} onChange={onNameChange}/>
 				<PropertiesProvider properties={selected}>
 					<TransformDrawer onChange={sceneService.rpc_updateObject} />
-					<ImageDrawer onChange={sceneService.rpc_updateObject} />
+					<Drawer onChange={sceneService.rpc_updateObject} />
 				</PropertiesProvider>
 			</>
 		);

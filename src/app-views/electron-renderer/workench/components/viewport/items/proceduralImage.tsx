@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Vector2, Vector3 } from 'three';
-import { ProceduralImageObject, SceneObject } from '../../../../../../types/scene';
+import { AllSceneObject, ProceduralImageObject, SceneObject } from '../../../../../../types/scene';
+import { register3DComponent } from '../../../../core/registry';
+import ImageDrawer from '../../../parts/objectproperties/objectDrawer/component/imageDrawer';
 
 const encodeNumber_0_1_16_16 = (a: number, b: number): number => {
 	let kDecodeDot: Vector2 = new Vector2(1, 1 / 65535);
