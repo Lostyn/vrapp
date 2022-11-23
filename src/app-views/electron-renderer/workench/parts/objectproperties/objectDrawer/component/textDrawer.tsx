@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
-import { Color, Vector4 } from 'three'
 import { PropsWithProperties, withProperties } from '../../propertiesContext'
-import ColorDrawer from '../primitive/colorDrawer'
-import NumberDrawer from '../primitive/numberDrawer'
-import Vector4Drawer from '../primitive/vector4Drawer'
+import StringDrawer from '../primitive/stringDrawer'
 import ComponentHeader from '../ui/componentHeader'
 
 type IProps = PropsWithProperties & {
@@ -11,16 +8,20 @@ type IProps = PropsWithProperties & {
 }
 
 const TextDrawer = (props: IProps) => {
-	const {image, instanceID} = props;
+	const {text, instanceID} = props;
 	const [open, setOpen] = useState<boolean>(true);
 
 	const getPatch = (key, value) => {
 		return {
-			image: {
-				...image,
+			text: {
+				...text,
 				[key]: value
 			}
 		}
+	}
+
+	const onTextChange = (value:string) => {
+		props.onChange(instanceID, getPatch('text', value));
 	}
 
 	return (
@@ -28,7 +29,7 @@ const TextDrawer = (props: IProps) => {
 			<ComponentHeader open={open} setOpen={setOpen}>Text</ComponentHeader>
 			{ open && (
 				<>
-
+					<StringDrawer label='Text' property={text.text} onChange={onTextChange}/>
 				</>
 			)}
 		</>

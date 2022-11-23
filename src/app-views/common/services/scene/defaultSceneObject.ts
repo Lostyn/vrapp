@@ -22,5 +22,7 @@ export const DefaultImageObject = {
 }
 
 export const DefaultTextObject = {
-	text: "New text"
+	text: {
+		text: "New text"
+	}
 }

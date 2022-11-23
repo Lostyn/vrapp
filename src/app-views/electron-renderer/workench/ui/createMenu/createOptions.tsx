@@ -13,8 +13,6 @@ const CreateOptions = (props) => {
 		sceneService.rpc_createObject('text', createUUID());
 	}
 
-
-
 	return (
 		<div className='create-options'>
 			<button onClick={createProceduralImage}>Procedural Image</button>

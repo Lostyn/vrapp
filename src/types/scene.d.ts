@@ -15,7 +15,9 @@ export type ProceduralImageObject = SceneObject & {
 }
 
 export type TextObject = SceneObject & {
-	text: Text
+	text: {
+		text: Text
+	}
 }
 
 export type Transform = {
@@ -28,4 +30,8 @@ export type ProceduralImage = {
 	radius: Vector4;
 	borderWidth: number;
 	color: string;
+}
+
+export type Text = {
+	text: string
 }
