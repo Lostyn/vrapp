@@ -1,14 +1,12 @@
 
 import * as React from "react";
-import { Color, ColorRepresentation, DoubleSide } from 'three';
-import { Box, shaderMaterial } from '@react-three/drei';
-import { extend } from '@react-three/fiber'
+import { Color, DoubleSide } from 'three';
 
 
 
 const Grid = (props) => {
 	return (
-		<mesh>
+		<mesh frustumCulled={false}>
 			<planeGeometry args={[2, 2, 1, 1]}/>
 			<gridMaterial
 				uSize1={1}
