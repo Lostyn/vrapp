@@ -5,7 +5,6 @@ import { createUUID } from '../../core/id';
 import Signal from '../../core/signal';
 import SocketClientService from '../socketClient/socketClientService';
 import { DefaultImageObject, DefaultSceneObject, DefaultTextObject } from './defaultSceneObject';
-import sample from './sample';
 
 const kc_sceneServiceChannel: string = 'scene:rpc';
 class SceneService {
