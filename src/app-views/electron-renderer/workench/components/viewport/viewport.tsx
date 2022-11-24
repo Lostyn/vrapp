@@ -1,14 +1,14 @@
-import { GizmoHelper, GizmoViewport, OrbitControls } from '@react-three/drei';
+import { GizmoHelper, GizmoViewcube, GizmoViewport, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React, { useEffect, useState } from "react";
 import { SceneObject } from '../../../../../types/scene';
 import { useServices } from '../../../services/serviceContext';
 import Grid from './items/grid';
-import ProceduralImage from './items/proceduralImage';
+import { Get3DComponentFromType } from '../../../core/registry';
 
 import "../../../shaders/gridMaterial"
 import "../../../shaders/proceduralImageMaterial"
-import { Get3DComponentFromType } from '../../../core/registry';
+
 
 type IProps = {
 
@@ -50,17 +50,22 @@ const Viewport = (props: IProps) => {
 
 	return (
 		<div id="viewport">
-			<Canvas camera={{position: [0, 1.7, 3]}}>
-				<OrbitControls target={[0, 0, 0]}/>
+			<Canvas
+				camera={{position: [0, 1.7, 3]}}
+
+			>
+				<OrbitControls target={[0, 0, 0]} enableDamping={false} rotateSpeed={0.5}/>
+				<Grid />
+				<color attach="background" args={["#505050"]}/>
 				<GizmoHelper
 					alignment="top-right"
 					margin={[80, 80]}
 				>
 					<GizmoViewport/>
 				</GizmoHelper>
-				<Grid />
+
+
 				{ renderItems(rootItems) }
-				<color attach="background" args={["#505050"]}/>
 			</Canvas>
 		</div>
 	)
