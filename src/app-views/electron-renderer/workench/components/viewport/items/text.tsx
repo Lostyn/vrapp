@@ -1,6 +1,6 @@
-import { Box, Text as DreiText } from '@react-three/drei';
-import React, { useEffect, useRef } from 'react';
-import { Vector3 } from 'three';
+import { Text as DreiText } from '@react-three/drei';
+import React from 'react';
+import { Color, Vector3 } from 'three';
 import { TextObject } from '../../../../../../types/scene';
 
 
@@ -18,9 +18,10 @@ const Text = (props:IProps) => {
 			position={getArray(transform.position)}
 			rotation={getArray(transform.rotation)}
 			frustumCulled={false}
-			color="black"
+			color={text.color.replace('0x', '#')}
 			anchorX="center"
 			anchorY="middle"
+			fontSize={text.fontSize * 0.01}
 		>
 			{text.text}
 			{props.children}

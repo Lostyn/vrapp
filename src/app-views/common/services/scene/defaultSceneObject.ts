@@ -23,6 +23,8 @@ export const DefaultImageObject = {
 
 export const DefaultTextObject = {
 	text: {
-		text: "New text"
+		text: "New text",
+		color: "0xffffff",
+		fontSize: 12
 	}
 }

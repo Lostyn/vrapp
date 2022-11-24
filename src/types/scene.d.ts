@@ -15,9 +15,7 @@ export type ProceduralImageObject = SceneObject & {
 }
 
 export type TextObject = SceneObject & {
-	text: {
-		text: Text
-	}
+	text: Text
 }
 
 export type Transform = {
@@ -33,5 +31,7 @@ export type ProceduralImage = {
 }
 
 export type Text = {
-	text: string
+	text: string,
+	color: string,
+	fontSize: number
 }
