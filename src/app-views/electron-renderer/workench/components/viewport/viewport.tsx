@@ -1,4 +1,4 @@
-import { GizmoHelper, GizmoViewcube, GizmoViewport, OrbitControls } from '@react-three/drei';
+import { GizmoHelper, GizmoViewcube, GizmoViewport, Image, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React, { useEffect, useState } from "react";
 import { SceneObject } from '../../../../../types/scene';
@@ -7,7 +7,7 @@ import Grid from './items/grid';
 import { Get3DComponentFromType } from '../../../core/registry';
 
 import "../../../shaders/gridMaterial"
-import "../../../shaders/proceduralImageMaterial"
+import "../../../shaders/shapeMaterial"
 
 
 type IProps = {
@@ -64,7 +64,7 @@ const Viewport = (props: IProps) => {
 					<GizmoViewport/>
 				</GizmoHelper>
 
-
+				<Image url='C:\Users\vince\Downloads\Main.jpg'/>
 				{ renderItems(rootItems) }
 			</Canvas>
 		</div>

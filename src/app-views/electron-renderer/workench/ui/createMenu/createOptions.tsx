@@ -6,7 +6,7 @@ const CreateOptions = (props) => {
 	const { sceneService } = useServices();
 
 	const createProceduralImage = () => {
-		sceneService.rpc_createObject('proceduralImage', createUUID());
+		sceneService.rpc_createObject('shape', createUUID());
 	}
 
 	const createText = () => {

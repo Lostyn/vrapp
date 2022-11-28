@@ -7,22 +7,26 @@ export type SceneObject = {
 	transform: Transform;
 }
 
-export type SceneObjectId = 'proceduralImage' | 'text';
-export type AllSceneObject = SceneObject | ProceduralImageObject | TextObject;
+export type SceneObjectId = 'shape' | 'text' | 'Image';
+export type AllSceneObject = SceneObject | ShapeObject | TextObject;
 
-export type ProceduralImageObject = SceneObject & {
-	image: ProceduralImage;
+export type ShapeObject = SceneObject & {
+	shape: Shape;
 }
 
 export type TextObject = SceneObject & {
 	text: Text
 }
 
+export type ImageObject = SceneObject & {
+
+}
+
 export type Transform = {
 	position: Vector3;
 	rotation: Vector3;
 }
-export type ProceduralImage = {
+export type Shape = {
 	width: number;
 	height: number;
 	radius: Vector4;

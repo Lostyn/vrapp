@@ -11,8 +11,8 @@ export const DefaultSceneObject = (instanceID: string, name: string): SceneObjec
 	},
 })
 
-export const DefaultImageObject = {
-	image: {
+export const DefaultShapeObject = {
+	shape: {
 		width: 1,
 		height: 1,
 		radius: new Vector4(0, 0, 0, 0),

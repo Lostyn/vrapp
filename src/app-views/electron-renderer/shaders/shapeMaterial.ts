@@ -2,7 +2,7 @@ import { shaderMaterial } from '@react-three/drei';
 import { extend } from '@react-three/fiber';
 import { Color, Vector2, Vector3 } from 'three';
 
-const ProceduralImageMaterial = shaderMaterial(
+const ShapeMaterial = shaderMaterial(
 	{
 		position: new Vector3(),
 		color: new Color(),
@@ -133,21 +133,16 @@ const ProceduralImageMaterial = shaderMaterial(
 	`
 )
 
-extend({ ProceduralImageMaterial })
+extend({ ShapeMaterial })
 
-type ProceduralImageMaterialImpl = {
-	// position: Vector3,
-	color: Color,
-	// uv: Vector2,
-	// uv2: Vector2,
-	// uv3: Vector2,
-	// uv4: Vector2
+type ShapeMaterialImpl = {
+	color: Color
 } & JSX.IntrinsicElements['shaderMaterial'];
 
 declare global {
 	namespace JSX {
 		interface IntrinsicElements {
-			proceduralImageMaterial: ProceduralImageMaterialImpl
+			shapeMaterial: ShapeMaterialImpl
 		}
 	}
 }

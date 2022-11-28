@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Vector2, Vector3 } from 'three';
-import { AllSceneObject, ProceduralImageObject, SceneObject } from '../../../../../../types/scene';
+import { AllSceneObject, ShapeObject, SceneObject } from '../../../../../../types/scene';
 import { register3DComponent } from '../../../../core/registry';
-import ImageDrawer from '../../../parts/objectproperties/objectDrawer/component/imageDrawer';
+import ShapeDrawer from '../../../parts/objectproperties/objectDrawer/component/shapeDrawer';
 
 const encodeNumber_0_1_16_16 = (a: number, b: number): number => {
 	let kDecodeDot: Vector2 = new Vector2(1, 1 / 65535);
@@ -13,12 +13,12 @@ const encodeNumber_0_1_16_16 = (a: number, b: number): number => {
 }
 
 type IProps = {
-	item:ProceduralImageObject,
+	item:ShapeObject,
 	children: any
 }
 
-const ProceduralImage = (props:IProps) => {
-	const {transform, image} = props.item;
+const Shape = (props:IProps) => {
+	const {transform, shape: image} = props.item;
 	const getArray: (p:Vector3) => [x:number, y:number, z:number] = (p: Vector3) => {return [ p.x, p.y, p.z ]};
 
 	const geoRef = useRef<BufferGeometry>(null);
@@ -79,7 +79,7 @@ const ProceduralImage = (props:IProps) => {
 					count={6}
 					itemSize={1}/>
 			</bufferGeometry>
-			<proceduralImageMaterial
+			<shapeMaterial
 				color={new Color().setHex(parseInt(image.color))}
 				transparent={true}
 				side={DoubleSide}
@@ -91,4 +91,4 @@ const ProceduralImage = (props:IProps) => {
 	)
 }
 
-export default ProceduralImage;
+export default Shape;
