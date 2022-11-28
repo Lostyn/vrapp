@@ -5,7 +5,7 @@ import { useServices } from '../../../services/serviceContext';
 const CreateOptions = (props) => {
 	const { sceneService } = useServices();
 
-	const createProceduralImage = () => {
+	const createShape = () => {
 		sceneService.rpc_createObject('shape', createUUID());
 	}
 
@@ -13,10 +13,15 @@ const CreateOptions = (props) => {
 		sceneService.rpc_createObject('text', createUUID());
 	}
 
+	const createImage = () => {
+		sceneService.rpc_createObject('image', createUUID());
+	}
+
 	return (
 		<div className='create-options'>
-			<button onClick={createProceduralImage}>Procedural Image</button>
+			<button onClick={createShape}>Shape</button>
 			<button onClick={createText}>Text</button>
+			<button onClick={createImage}>Image</button>
 		</div>
 	)
 }

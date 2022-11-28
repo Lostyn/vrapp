@@ -28,3 +28,9 @@ export const DefaultTextObject = {
 		fontSize: 12
 	}
 }
+
+export const DefaultImageObject = {
+	image: {
+		src: ''
+	}
+}

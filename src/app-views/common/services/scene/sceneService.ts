@@ -4,7 +4,7 @@ import { AllSceneObject, SceneObject, SceneObjectId } from '../../../../types/sc
 import { createUUID } from '../../core/id';
 import Signal from '../../core/signal';
 import SocketClientService from '../socketClient/socketClientService';
-import { DefaultShapeObject, DefaultSceneObject, DefaultTextObject } from './defaultSceneObject';
+import { DefaultShapeObject, DefaultSceneObject, DefaultTextObject, DefaultImageObject } from './defaultSceneObject';
 
 const kc_sceneServiceChannel: string = 'scene:rpc';
 class SceneService {
@@ -66,10 +66,13 @@ class SceneService {
 
 		switch (type) {
 			case 'shape':
-				so = Object.assign({}, DefaultSceneObject(instanceID, type), DefaultShapeObject)
+				so = Object.assign({}, DefaultSceneObject(instanceID, type), DefaultShapeObject);
 				break;
 			case 'text':
-				so = Object.assign({}, DefaultSceneObject(instanceID, type), DefaultTextObject)
+				so = Object.assign({}, DefaultSceneObject(instanceID, type), DefaultTextObject);
+				break;
+			case 'image':
+				so = Object.assign({}, DefaultSceneObject(instanceID, type), DefaultImageObject);
 				break;
 		}
 

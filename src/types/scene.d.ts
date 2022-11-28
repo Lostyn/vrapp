@@ -7,7 +7,7 @@ export type SceneObject = {
 	transform: Transform;
 }
 
-export type SceneObjectId = 'shape' | 'text' | 'Image';
+export type SceneObjectId = 'shape' | 'text' | 'image';
 export type AllSceneObject = SceneObject | ShapeObject | TextObject;
 
 export type ShapeObject = SceneObject & {
@@ -19,7 +19,7 @@ export type TextObject = SceneObject & {
 }
 
 export type ImageObject = SceneObject & {
-
+	image: Image;
 }
 
 export type Transform = {
@@ -38,4 +38,8 @@ export type Text = {
 	text: string,
 	color: string,
 	fontSize: number
+}
+
+export type Image = {
+	src: string
 }

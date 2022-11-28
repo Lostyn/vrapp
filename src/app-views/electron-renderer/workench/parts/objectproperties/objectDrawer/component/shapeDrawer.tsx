@@ -46,7 +46,7 @@ const ShapeDrawer = (props: IProps) => {
 
 	return (
 		<>
-			<ComponentHeader open={open} setOpen={setOpen}>Image</ComponentHeader>
+			<ComponentHeader open={open} setOpen={setOpen}>Shape</ComponentHeader>
 			{ open && (
 				<>
 					<ColorDrawer label='Color' onChange={onColorChange} property={shape.color} />

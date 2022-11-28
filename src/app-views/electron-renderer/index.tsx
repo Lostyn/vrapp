@@ -6,15 +6,18 @@ import SocketClientService from '../common/services/socketClient/socketClientSer
 import WindowsService from '../common/services/windows/windowsService';
 import { register3DComponent } from './core/registry';
 import { ServicesProvider } from './services/serviceContext';
+import Image from './workench/components/viewport/items/image';
 import Shape from './workench/components/viewport/items/shape';
 import Text from './workench/components/viewport/items/text';
 import Viewport from './workench/components/viewport/viewport';
 import DesktopUI from './workench/desktopUI';
+import imageDrawer from './workench/parts/objectproperties/objectDrawer/component/imageDrawer';
 import shapeDrawer from './workench/parts/objectproperties/objectDrawer/component/shapeDrawer';
 import textDrawer from './workench/parts/objectproperties/objectDrawer/component/textDrawer';
 
 register3DComponent( 'shape', Shape, shapeDrawer )
 register3DComponent( 'text', Text, textDrawer);
+register3DComponent( 'image', Image, imageDrawer);
 
 class DesktopWorkbench {
 	workbenchContainer: HTMLElement;

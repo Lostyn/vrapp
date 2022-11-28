@@ -63,8 +63,6 @@ const Viewport = (props: IProps) => {
 				>
 					<GizmoViewport/>
 				</GizmoHelper>
-
-				<Image url='C:\Users\vince\Downloads\Main.jpg'/>
 				{ renderItems(rootItems) }
 			</Canvas>
 		</div>
